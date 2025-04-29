@@ -1,11 +1,54 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Badge from "@/components/Badge.astro";
+import SocialPill from "@/components/SocialPill.astro";
+import Layout from "@layouts/Layout.astro";
+
+import { Icon } from "astro-icon/components";
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+  title="Portfolio de Jonnathan Espinoza - Desarrollador y Programador Web"
+  description="Contrata a Jonnathan Espinoza, un desarrollador web con más de 3 años de experiencia en la creación de aplicaciones únicas y personalizadas. Con habilidades en HTML, CSS, JavaScript y frameworks modernos, Jonnathan está listo para llevar tu proyecto al siguiente nivel."
+  image="https://m.media-amazon.com/images/I/51rayl0HnRL.jpg"
+>
+  <main>
+    <section class="w-full mx-auto lg:w-[740px] py-44">
+      <img
+        src="https://m.media-amazon.com/images/I/51rayl0HnRL.jpg"
+        alt="jonnathan photo"
+        class="rounded-full w-12 h-12 mb-4"
+      />
+      <h1 class="text-white text-5xl font-bold flex flex-row gap-x-4 pb-10">
+        Hey, soy Jonnathan <a
+          href="https://www.linkedin.com/in/jonnathan-espinoza-604a41226/"
+          class="flex justify-center items-center"
+        >
+          <Badge>Disponible para trabajar</Badge>
+        </a>
+      </h1>
+      <h2 class="text-2xl opacity-80 text-wrap">
+        <span>+3 años de experiencia.</span><span class="text-yellow-200/90">
+          Desarrollador web.</span
+        ><span class="text-red-200/90"> De Cuenca, Ecuador</span>. <span
+          class="opacity-75"
+        >
+          Especializado en crear aplicaciones únicas.</span
+        >
+      </h2>
+
+      <nav class="flex gap-x-4 mt-8">
+        <SocialPill
+          href="https://www.linkedin.com/in/jonnathan-espinoza-604a41226/"
+        >
+          <Icon name="LinkedIn" size={24} />LinkedIn
+        </SocialPill>
+        <SocialPill href="https://github.com/JonnathanE">
+          <Icon name="GitHub" size={24} />LinkedIn
+        </SocialPill>
+      </nav>
+    </section>
+  </main>
 </Layout>
