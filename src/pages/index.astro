@@ -1,6 +1,8 @@
 ---
 import Badge from "@/components/Badge.astro";
+import Experience from "@/components/Experience.astro";
 import SocialPill from "@/components/SocialPill.astro";
+import SectionContainer from "@/components/SectionContainer.astro";
 import Layout from "@layouts/Layout.astro";
 
 import { Icon } from "astro-icon/components";
@@ -14,8 +16,8 @@ import { Icon } from "astro-icon/components";
   description="Contrata a Jonnathan Espinoza, un desarrollador web con más de 3 años de experiencia en la creación de aplicaciones únicas y personalizadas. Con habilidades en HTML, CSS, JavaScript y frameworks modernos, Jonnathan está listo para llevar tu proyecto al siguiente nivel."
   image="https://m.media-amazon.com/images/I/51rayl0HnRL.jpg"
 >
-  <main>
-    <section class="w-full mx-auto lg:w-[740px] py-44">
+  <!-- <main>
+    <SectionContainer class="py-44 pb-24">
       <img
         src="https://m.media-amazon.com/images/I/51rayl0HnRL.jpg"
         alt="jonnathan photo"
@@ -46,9 +48,19 @@ import { Icon } from "astro-icon/components";
           <Icon name="LinkedIn" size={24} />LinkedIn
         </SocialPill>
         <SocialPill href="https://github.com/JonnathanE">
-          <Icon name="GitHub" size={24} />LinkedIn
+          <Icon name="GitHub" size={24} />GitHub
+        </SocialPill>
+        <SocialPill href="mailto:jonaes930@gmail.com">
+          <Icon name="MailPlus" size={24} />Contáctame
         </SocialPill>
       </nav>
-    </section>
-  </main>
+    </SectionContainer>
+
+    <SectionContainer id="experiencia">
+      <h2 class="text-2xl font-semibold mb-6 flex gap-x-3 items-center">
+        <Icon name="Briefcase" size={28} /> Experiencia laboral
+      </h2>
+      <Experience />
+    </SectionContainer>
+  </main> -->
 </Layout>

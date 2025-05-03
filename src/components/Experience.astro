@@ -1,0 +1,37 @@
+---
+import ExperienceItem from "./ExperienceItem.astro";
+
+const EXPERIENCE = [
+  {
+    date: "Agosto 2022 - Actualidad",
+    title: "Desarrollador Full Stack",
+    empresa: "Tecnofin Tecnología e Innovación S.A.S.",
+    description:
+      "Responsable del desarrollo y mantenimiento de la aplicación web CARTERA365, orientada a la gestión de créditos. Encargado de la creación de APIs REST y interfaces de usuario, integrando funcionalidades clave para la experiencia del cliente. Administración de bases de datos en SQL Server, incluyendo diseño, optimización y consultas avanzadas. Análisis de requerimientos y propuesta de soluciones técnicas eficientes alineadas con los objetivos del cliente. Supervisión de nuevas funcionalidades (features) y correcciones (fixes) implementadas en el proyecto. Gestión de despliegue, monitoreo y mantenimiento en servidores AWS. Además, participé en el diseño y construcción de un Data Warehouse (DW), implementando procesos ETL mediante SSIS y liderando migraciones de datos críticas para la operación del sistema. Desarrollo e integración de un chatbot automatizado para WhatsApp utilizando n8n, mejorando la interacción y soporte al cliente.",
+    link: null,
+  },
+  {
+    date: "Enero 2025 - Febrero 2025",
+    title: "Desarrollador Web WordPress",
+    empresa: "Fastline Cia.Ltda",
+    description:
+      "Participación en el desarrollo de una Intranet corporativa utilizando WordPress como CMS principal. Uso de Elementor como constructor de páginas para crear plantillas y componentes reutilizables basados en diseños provenientes de Figma, garantizando coherencia visual y funcionalidad. Evaluación, prueba y configuración de distintos plugins para cumplir con los requerimientos específicos del proyecto. Desarrollo de funcionalidades personalizadas mediante Code Snippets en PHP, adaptando la plataforma a necesidades particulares del cliente.",
+    link: null,
+  },
+];
+---
+
+<ol class="relative border-s border-gray-200 dark:border-gray-700 ml-3">
+  {
+    EXPERIENCE.map((experiencie) => (
+      <li class="mb-10 ms-4">
+        <ExperienceItem
+          date={experiencie.date}
+          title={experiencie.title}
+          description={experiencie.description}
+          link={experiencie.link}
+        />
+      </li>
+    ))
+  }
+</ol>

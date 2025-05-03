@@ -1,12 +1,129 @@
 ---
+import ThemeToggle from "./ThemeToggle.astro";
+import { Icon } from "astro-icon/components";
 
+const navItems = [
+  {
+    title: "Home",
+    label: "home",
+    url: "/#top",
+  },
+  {
+    title: "About me",
+    label: "about-me",
+    url: "/#about-me",
+  },
+  {
+    title: "Services",
+    label: "services",
+    url: "/#services",
+  },
+  {
+    title: "My work",
+    label: "my-work",
+    url: "/#my-work",
+  },
+  {
+    title: "Contact me",
+    label: "contact-me",
+    url: "/#contact",
+  },
+];
 ---
 
-<header class="flex justify-center items-center py-5 w-[1120px] mx-auto">
-  <nav class="flex flex-row gap-x-10 opacity-80">
-    <a href="/">Home</a>
-    <a href="/about">About</a>
-    <a href="/projects">Projects</a>
-    <a href="/contact">Contact</a>
+<header>
+  <nav
+    class="w-full fixed px-5 lg:px-8 xl:px-[8%] py-4 flex items-center justify-between z-50"
+  >
+    <!-- <img
+      src="/images/logo.png"
+      alt="Logo Jonnathan Espinoza"
+      class="w-28 cursor-pointer mr-14"
+    /> -->
+    <a href="/" class="text-3xl font-bold cursor-pointer mr-14">JEDE</a>
+    <ul
+      class="hidden md:flex items-center gap-6 lg:gap-8 rounded-full px-12 py-3 bg-white shadow-sm bg-opacity-50"
+    >
+      {
+        navItems.map((link) => (
+          <li>
+            <a aria-label={link.label} href={link.url}>
+              {link.title}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <div class="flex items-center gap-4">
+      <button>
+        <img src="/images/moon_icon.png" alt="mode dark" class="w-6" />
+        <!-- <Icon name="moon" size={25} class="text-gray-500" /> -->
+      </button>
+      <a
+        href="#contact"
+        class="hidden lg:flex items-center gap-3 px-10 py-2.5 border border-gray-500 rounded-full ml-4"
+        >Contact
+        <!-- <Icon name="arrow-up-right" size={25} class="text-gray-500" /> -->
+        <img src="/images/arrow-icon.png" alt="contact" class="w-3" />
+      </a>
+      <button id="btnMenu" class="block md:hidden ml-3">
+        <img src="/images/menu-black.png" alt="" class="w-6" />
+      </button>
+    </div>
+    <!-- Mobile menu -->
+    <ul
+      id="sideMenu"
+      class="flex md:hidden flex-col gap-4 py-20 px-10 fixed -right-64 top-0 bottom-0 w-64 z-50 h-screen bg-white shadow-lg rounded-l-3xl transition duration-500"
+    >
+      <div id="divCloseMenu" class="absolute right-6 top-6">
+        <img src="/images/close-black.png" alt="" class="w-5" />
+      </div>
+      {
+        navItems.map((link) => (
+          <li>
+            <a aria-label={link.label} href={link.url}>
+              {link.title}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
   </nav>
 </header>
+
+<script>
+  // This script is used to open and close the side menu on mobile devices
+  const sideMenu = document.querySelector("#sideMenu") as HTMLUListElement;
+  const menuButton = document.querySelector("#btnMenu") as HTMLButtonElement;
+  const closeButton = sideMenu.querySelector("#divCloseMenu") as HTMLDivElement;
+
+  // method to open the menu
+  const openMenu = () => {
+    sideMenu.style.transform = "translateX(-16rem)";
+  };
+
+  // method to close the menu
+  const closeMenu = () => {
+    sideMenu.style.transform = "translateX(16rem)";
+  };
+
+  // open menu when clicking on the menu button
+  menuButton.addEventListener("click", openMenu);
+  // close menu when clicking on the close button
+  closeButton.addEventListener("click", closeMenu);
+  // close menu when clicking outside
+  document.addEventListener("click", (event) => {
+    if (
+      !sideMenu.contains(event.target as Node) &&
+      !menuButton.contains(event.target as Node)
+    ) {
+      closeMenu();
+    }
+  });
+  // close menu when clicking on a link
+  sideMenu.addEventListener("click", (event) => {
+    if (event.target instanceof HTMLAnchorElement) {
+      closeMenu();
+    }
+  });
+</script>

@@ -1,20 +1,27 @@
 @import "tailwindcss";
 
-:root {
-  color-scheme: light dark;
+@theme inline {
+  --font-sans: "Onest Variable", sans-serif;
 }
 
-@theme {
-  --font-sans: "Onest Variable", sans-serif;
+:root {
+  color-scheme: light;
+}
+
+.dark {
 }
 
 html {
   font-family: var(--font-sans);
+  scroll-behavior: smooth;
 }
 
 body {
-  background-color: #050505;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
