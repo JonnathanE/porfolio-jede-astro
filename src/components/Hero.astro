@@ -1,0 +1,40 @@
+---
+import SocialPill from "@/components/SocialPill.astro";
+import { Icon } from "astro-icon/components";
+---
+
+<div
+  class="w-11/12 max-w-3xl text-center mx-auto h-screen flex flex-col items-center justify-center gap-4"
+>
+  <img
+    src="https://m.media-amazon.com/images/I/51rayl0HnRL.jpg"
+    alt=""
+    class="rounded-full w-32 h-32"
+  />
+  <h3 class="flex items-end gap-2 text-xl md:text-2xl mb-3">
+    Hi! I'm Jonnathan Espinoza
+  </h3>
+  <h1 class="text-3xl sm:text-6xl lg:text-[66px]">
+    Web developer based in Ecuador.
+  </h1>
+  <span class="max-w-2xl mx-auto">
+    +3 years of experience. Systems Engineer from Ecuador. Specialized in the
+    development of unique web applications.
+  </span>
+  <div class="flex flex-col sm:flex-row items-center gap-4 mt-4">
+    <SocialPill href="mailto:jonaes930@gmail.com">
+      <Icon name="MailPlus" size={24} />Contact me
+    </SocialPill>
+    <SocialPill
+      href="https://www.linkedin.com/in/jonnathan-espinoza-604a41226/"
+    >
+      <Icon name="LinkedIn" size={24} />LinkedIn
+    </SocialPill>
+    <!-- <SocialPill href="https://github.com/JonnathanE">
+          <Icon name="GitHub" size={24} class="" />GitHub
+        </SocialPill> -->
+    <SocialPill href="/images/logo.png">
+      <Icon name="download" size={24} class="" />Download CV
+    </SocialPill>
+  </div>
+</div>
