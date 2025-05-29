@@ -1,12 +1,22 @@
 ---
-import SocialPill from "@/components/SocialPill.astro";
+import { Picture } from "astro:assets";
 import { Icon } from "astro-icon/components";
+
+import SocialPill from "@/components/SocialPill.astro";
+
+import ProfileImg from "@assets/images/luffy.jpeg";
 ---
 
 <div
   class="w-11/12 max-w-3xl text-center mx-auto h-screen flex flex-col items-center justify-center gap-4"
 >
-  <img src="/images/luffy.jpeg" alt="" class="rounded-full w-32 h-32" />
+  <Picture
+    src={ProfileImg}
+    alt="Photo's Jonnathan Espinoza"
+    quality="high"
+    formats={["webp", "jpg"]}
+    class="rounded-full w-32 h-32"
+  />
   <h3 class="flex items-end gap-2 text-xl md:text-2xl mb-3">
     Hi! I'm Jonnathan Espinoza
   </h3>

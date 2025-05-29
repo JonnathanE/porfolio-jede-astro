@@ -3,8 +3,12 @@ import "../styles/global.css";
 
 import "@fontsource-variable/onest";
 
+import { Picture } from "astro:assets";
+
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
+
+import HeroBgColorImg from "@assets/images/header-bg-color.png";
 
 interface Props {
   title?: string;
@@ -37,7 +41,13 @@ const {
   </head>
   <body class="">
     <div class="fixed top-0 right-0 w-11/12 -z-10 translate-y-[-80%]">
-      <img src="/images/header-bg-color.png" alt="" class="w-full" />
+      <Picture
+        src={HeroBgColorImg}
+        alt="Background color image"
+        quality="low"
+        formats={["webp", "jpg"]}
+        class="w-full"
+      />
     </div>
     <Header />
     <slot />

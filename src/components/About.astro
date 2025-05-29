@@ -1,5 +1,10 @@
 ---
+import { Picture } from "astro:assets";
 
+import ProfileImg from "@assets/images/luffy_gear_5.jpeg";
+import CodeIconImg from "@assets/images/code-icon.png";
+import EduIconImg from "@assets/images/edu-icon.png";
+import ProjectIconImg from "@assets/images/project-icon.png";
 ---
 
 <div id="about-me" class="w-full px-[12%] py-10 scroll-mt-20">
@@ -7,10 +12,11 @@
   <h2 class="text-center text-5xl">About me</h2>
   <div class="flex w-full flex-col lg:flex-row items-center gap-20 my-20">
     <div class="max-w-max mx-auto relative">
-      <!-- src="/images/user-image.png" -->
-      <img
-        src="/images/luffy_gear_5.jpeg"
-        alt=""
+      <Picture
+        src={ProfileImg}
+        alt="Profile Jonnathan Espinoza"
+        quality="high"
+        formats={["webp", "jpg"]}
         class="w-64 sm:w-80 rounded-3xl max-w-none"
       />
       <!-- <div
@@ -38,7 +44,13 @@
         <li
           class="border-[0.5px] border-gray-400 rounded-xl p-6 cursor-pointer hover:bg-[#fcf4ff] hover:-translate-y-1 duration-500 hover:shadow-[4px_4px_0px_#000]"
         >
-          <img src="/images/code-icon.png" alt="" class="w-7 mt-3" />
+          <Picture
+            src={CodeIconImg}
+            alt="code icon"
+            quality="low"
+            formats={["webp", "jpg"]}
+            class="w-7 mt-3"
+          />
           <h3 class="my-4 font-semibold text-gray-700">Languages</h3>
           <p class="text-gray-600 text-sm">
             JavaScript, TypeScript, Python, HTML, CSS, SQL
@@ -47,7 +59,13 @@
         <li
           class="border-[0.5px] border-gray-400 rounded-xl p-6 cursor-pointer hover:bg-[#fcf4ff] hover:-translate-y-1 duration-500 hover:shadow-[4px_4px_0px_#000]"
         >
-          <img src="/images/edu-icon.png" alt="" class="w-7 mt-3" />
+          <Picture
+            src={EduIconImg}
+            alt="Education icon"
+            quality="low"
+            formats={["webp", "jpg"]}
+            class="w-7 mt-3"
+          />
           <h3 class="my-4 font-semibold text-gray-700">Education</h3>
           <p class="text-gray-600 text-sm">
             Systems Engineer from the National University of Loja
@@ -56,7 +74,13 @@
         <li
           class="border-[0.5px] border-gray-400 rounded-xl p-6 cursor-pointer hover:bg-[#fcf4ff] hover:-translate-y-1 duration-500 hover:shadow-[4px_4px_0px_#000]"
         >
-          <img src="/images/project-icon.png" alt="" class="w-7 mt-3" />
+          <Picture
+            src={ProjectIconImg}
+            alt="Project icon"
+            quality="low"
+            formats={["webp", "jpg"]}
+            class="w-7 mt-3"
+          />
           <h3 class="my-4 font-semibold text-gray-700">Projects</h3>
           <p class="text-gray-600 text-sm">Built more than 5 projects</p>
         </li>
