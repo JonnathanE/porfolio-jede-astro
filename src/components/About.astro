@@ -1,15 +1,17 @@
 ---
 import { Picture } from "astro:assets";
 
+import SectionContainer from "@/components/SectionContainer.astro";
+import TitleSection from "@/components/TitleSection.astro";
+
 import ProfileImg from "@assets/images/luffy_gear_5.jpeg";
 import CodeIconImg from "@assets/images/code-icon.png";
 import EduIconImg from "@assets/images/edu-icon.png";
 import ProjectIconImg from "@assets/images/project-icon.png";
 ---
 
-<div id="about-me" class="w-full px-[12%] py-10 scroll-mt-20">
-  <h4 class="text-center mb-2 text-lg">Introduction</h4>
-  <h2 class="text-center text-5xl">About me</h2>
+<SectionContainer id="about-me">
+  <TitleSection title="About me" subtitle="Introduction" />
   <div class="flex w-full flex-col lg:flex-row items-center gap-20 my-20">
     <div class="max-w-max mx-auto relative">
       <Picture
@@ -115,4 +117,4 @@ import ProjectIconImg from "@assets/images/project-icon.png";
       </ul>
     </div>
   </div>
-</div>
+</SectionContainer>

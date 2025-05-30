@@ -1,6 +1,9 @@
 ---
 import { Image } from "astro:assets";
 
+import SectionContainer from "@/components/SectionContainer.astro";
+import TitleSection from "@/components/TitleSection.astro";
+
 import WebIconImg from "@assets/images/web-icon.png";
 import RightArrowImg from "@assets/images/right-arrow.png";
 import MobileIconImg from "@assets/images/mobile-icon.png";
@@ -8,13 +11,13 @@ import UiIconImg from "@assets/images/ui-icon.png";
 import GraphicsIconImg from "@assets/images/graphics-icon.png";
 ---
 
-<div id="services" class="w-full px-[12%] py-10 scroll-mt-20">
-  <h4 class="text-center mb-2 text-lg">What i offer</h4>
-  <h2 class="text-center text-5xl">My services</h2>
-  <p class="text-center max-w-2xl mx-auto mt-5 mb-12">
-    I am fronted develop from Ecuador with 3 year of experience in multiple
-    companies like Microsoft, Tesla and Apple
-  </p>
+<SectionContainer id="services">
+  <TitleSection
+    title="My services"
+    subtitle="What i offer"
+    description="I am fronted develop from Ecuador with 3 year of experience in multiple companies like Microsoft, Tesla and Apple"
+  />
+
   <div class="grid grid-cols-4 gap-6 my-10">
     <div
       class="border border-gray-400 rounded-lg px-8 py-12 hover:shadow-[4px_4px_0px_#000] cursor-pointer hover:bg-[#fcf4ff] hover:-translate-y-1 duration-500"
@@ -65,4 +68,4 @@ import GraphicsIconImg from "@assets/images/graphics-icon.png";
       >
     </div>
   </div>
-</div>
+</SectionContainer>

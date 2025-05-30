@@ -4,10 +4,8 @@ import Layout from "@layouts/Layout.astro";
 import Hero from "@/components/Hero.astro";
 import About from "@/components/About.astro";
 import Services from "@/components/Services.astro";
-import Badge from "@/components/Badge.astro";
+import Portfolio from "@/components/Portfolio.astro";
 import Experience from "@/components/Experience.astro";
-
-import SectionContainer from "@/components/SectionContainer.astro";
 
 import { Icon } from "astro-icon/components";
 ---
@@ -21,43 +19,6 @@ import { Icon } from "astro-icon/components";
     <Hero />
     <About />
     <Services />
+    <Portfolio />
   </main>
-
-  <!-- <main>
-    <SectionContainer class="py-44 pb-24">
-      <img
-        src="https://m.media-amazon.com/images/I/51rayl0HnRL.jpg"
-        alt="jonnathan photo"
-        class="rounded-full w-12 h-12 mb-4"
-      />
-      <h1 class="text-white text-5xl font-bold flex flex-row gap-x-4 pb-10">
-        Hey, soy Jonnathan <a
-          href="https://www.linkedin.com/in/jonnathan-espinoza-604a41226/"
-          class="flex justify-center items-center"
-        >
-          <Badge>Disponible para trabajar</Badge>
-        </a>
-      </h1>
-      <h2 class="text-2xl opacity-80 text-wrap">
-        <span>+3 años de experiencia.</span><span class="text-yellow-200/90">
-          Desarrollador web.</span
-        ><span class="text-red-200/90"> De Cuenca, Ecuador</span>. <span
-          class="opacity-75"
-        >
-          Especializado en crear aplicaciones únicas.</span
-        >
-      </h2>
-
-      <nav class="flex gap-x-4 mt-8">
-        
-      </nav>
-    </SectionContainer>
-
-    <SectionContainer id="experiencia">
-      <h2 class="text-2xl font-semibold mb-6 flex gap-x-3 items-center">
-        <Icon name="Briefcase" size={28} /> Experiencia laboral
-      </h2>
-      <Experience />
-    </SectionContainer>
-  </main> -->
 </Layout>
