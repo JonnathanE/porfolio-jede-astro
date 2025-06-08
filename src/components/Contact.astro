@@ -5,7 +5,7 @@ import TitleSection from "@/components/TitleSection.astro";
 
 <SectionContainer
   id="contact"
-  class="bg-[url('/images/footer-bg-color.png')] bg-no-repeat bg-[lenght:90%_auto] bg-center"
+  class="bg-[url('/images/footer-bg-color.png')] bg-no-repeat bg-[lenght:90%_auto] bg-center dark:bg-none"
 >
   <TitleSection
     title="Get in touch"
@@ -17,21 +17,21 @@ import TitleSection from "@/components/TitleSection.astro";
       <input
         type="text"
         placeholder="Enter your name"
-        class="flex-1 p-3 outline-none border-[0.5px] border-gray-400 rounded-md bg-white"
+        class="flex-1 p-3 outline-none border-[0.5px] border-gray-400 rounded-md bg-white dark:bg-darkTheme dark:border-white/90 dark:text-white"
       />
       <input
         type="email"
         placeholder="Enter your email"
-        class="flex-1 p-3 outline-none border-[0.5px] border-gray-400 rounded-md bg-white"
+        class="flex-1 p-3 outline-none border-[0.5px] border-gray-400 rounded-md bg-white dark:bg-darkTheme dark:border-white/90 dark:text-white"
       />
     </div>
     <textarea
       rows="6"
       placeholder="Enter your message"
-      class="w-full p-4 outline-none border-[0.5px] border-gray-400 rounded-md bg-white mb-6"
+      class="w-full p-4 outline-none border-[0.5px] border-gray-400 rounded-md bg-white mb-6 dark:bg-darkTheme dark:border-white/90 dark:text-white"
     ></textarea>
     <button
-      class="py-3 px-8 w-max flex items-center justify-between gap-2 bg-black/80 text-white rounded-full mx-auto hover:bg-black duration-500"
+      class="py-3 px-8 w-max flex items-center justify-between gap-2 bg-black/80 text-white rounded-full mx-auto cursor-pointer hover:bg-black duration-500 dark:bg-transparent dark:border-[0.5px] dark:hover:bg-darkTheme"
       >Submit now <img
         src="/images/right-arrow-white.png"
         alt=""

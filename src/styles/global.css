@@ -1,11 +1,35 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+Primary
+#489DBA
+rgb(72, 157, 186)
+hsl(195, 45%, 51%)
+
+Secondary
+#DACD9E
+rgb(218, 205, 158)
+hsl(47, 45%, 74%)
+
+Accent
+#1A1A15
+rgb(26, 26, 21)
+hsl(60, 11%, 9%)
+
+Backgroud dark theme color
+Hex: #030711
+Oklch: oklch(12.88% 0.025 260.23)
+*/
+
 @theme inline {
   --font-sans: "Onest Variable", sans-serif;
+  --color-darkTheme: oklch(12.88% 0.025 260.23);
 }
 
 :root {
-  color-scheme: light;
+  color-scheme: light dark;
 }
 
 .dark {

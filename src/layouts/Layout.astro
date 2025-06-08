@@ -23,7 +23,7 @@ const {
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -39,8 +39,10 @@ const {
     <!-- Required -->
     <title>{title}</title>
   </head>
-  <body class="">
-    <div class="fixed top-0 right-0 w-11/12 -z-10 translate-y-[-80%]">
+  <body class="bg-white text-black dark:bg-darkTheme dark:text-white">
+    <div
+      class="fixed top-0 right-0 w-11/12 -z-10 translate-y-[-80%] dark:hidden"
+    >
       <Picture
         src={HeroBgColorImg}
         alt="Background color image"
