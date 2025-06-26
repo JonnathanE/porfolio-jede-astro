@@ -26,6 +26,10 @@ Oklch: oklch(12.88% 0.025 260.23)
 @theme inline {
   --font-sans: "Onest Variable", sans-serif;
   --color-darkTheme: oklch(12.88% 0.025 260.23);
+
+  --color-primary: rgb(72, 157, 186);
+  --color-secondary: rgb(218, 205, 158);
+  --color-accent: rgb(26, 26, 21);
 }
 
 :root {

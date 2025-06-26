@@ -4,30 +4,41 @@ import { Icon } from "astro-icon/components";
 
 const navItems = [
   {
-    title: "Home",
-    label: "home",
+    title: "Inicio",
+    label: "inicio",
     url: "/#top",
   },
   {
-    title: "About me",
+    title: "Sobre mí",
     label: "about-me",
     url: "/#about-me",
   },
   {
-    title: "Services",
-    label: "services",
-    url: "/#services",
+    title: "Habilidades",
+    label: "skill",
+    url: "/#skill",
   },
   {
-    title: "My work",
+    title: "Experiencia",
+    label: "experience",
+    url: "/#experience",
+  },
+  {
+    title: "Proyectos",
     label: "my-work",
     url: "/#my-work",
   },
-  {
-    title: "Contact me",
-    label: "contact-me",
-    url: "/#contact",
-  },
+
+  // {
+  //   title: "Services",
+  //   label: "services",
+  //   url: "/#services",
+  // },
+  // {
+  //   title: "Contact me",
+  //   label: "contact-me",
+  //   url: "/#contact",
+  // },
 ];
 ---
 
@@ -47,7 +58,7 @@ const navItems = [
     >
       {
         navItems.map((link) => (
-          <li>
+          <li class="hover:text-primary">
             <a aria-label={link.label} href={link.url}>
               {link.title}
             </a>
@@ -57,16 +68,11 @@ const navItems = [
     </ul>
     <div class="flex items-center gap-4">
       <button id="btnTheme" class="cursor-pointer">
-        <img
-          src="/images/moon_icon.png"
-          alt="mode dark"
-          class="w-6 dark:hidden"
-        />
-        <!-- <Icon name="moon" size={25} class="text-gray-500" /> -->
-        <img
-          src="/images/sun_icon.png"
-          alt="mode dark"
-          class="w-6 hidden dark:block"
+        <Icon name="moon" size={24} class="w-6 dark:hidden text-gray-700" />
+        <Icon
+          name="SunHigh"
+          size={24}
+          class="w-6 hidden dark:block text-white"
         />
       </button>
       <a

@@ -16,14 +16,14 @@ interface Props {
   description?: string;
 }
 const {
-  title = "Jonnathan Espinoza's Portfolio - Web Developer and Programmer",
-  description = "Jonnathan Espinoza's Portfolio - Web Developer and Programmer",
+  title = "Portafolio de Jonnathan Espinoza - Desarrollador y Programador Web",
+  description = "Portafolio de Jonnathan Espinoza - Desarrollador y Programador Web",
   image,
 } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en" class="dark">
+<html lang="es" class="dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
@@ -40,7 +40,7 @@ const {
     <title>{title}</title>
   </head>
   <body class="bg-white text-black dark:bg-darkTheme dark:text-white">
-    <div
+    <!-- <div
       class="fixed top-0 right-0 w-11/12 -z-10 translate-y-[-80%] dark:hidden"
     >
       <Picture
@@ -50,7 +50,7 @@ const {
         formats={["webp", "jpg"]}
         class="w-full"
       />
-    </div>
+    </div> -->
     <Header />
     <slot />
   </body>
