@@ -1,0 +1,93 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+  image: string;
+  title: string;
+  description: string;
+  github?: string;
+  website?: string;
+  youtube?: string;
+  tech: string[];
+}
+
+const { image, title, description, github, website, youtube, tech } =
+  Astro.props;
+---
+
+<div
+  class="border border-white rounded-2xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 dark:border-white/50"
+>
+  <img src={image} alt={title} class="w-full h-48 object-cover" />
+
+  <div class="p-4">
+    <h3 class="text-xl font-semibold text-neutral-800 dark:text-white mb-2">
+      {title}
+    </h3>
+    <p class="text-sm text-neutral-600 dark:text-neutral-300 mb-4">
+      {description}
+    </p>
+
+    <div class="flex items-center gap-4 mb-4">
+      {
+        github && (
+          <a
+            href={github}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+          >
+            <Icon
+              name="GitHub_dark"
+              class="w-5 h-5 text-neutral-700 dark:text-white hover:text-blue-500 transition hidden dark:block"
+            />
+            <Icon
+              name="GitHub_light"
+              class="w-5 h-5 text-neutral-700 dark:text-white hover:text-blue-500 transition dark:hidden"
+            />
+          </a>
+        )
+      }
+      {
+        website && (
+          <a
+            href={website}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Sitio web"
+          >
+            <Icon
+              name="globe"
+              class="w-5 h-5 text-neutral-700 dark:text-white hover:text-green-500 transition"
+            />
+          </a>
+        )
+      }
+      {
+        youtube && (
+          <a
+            href={youtube}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="YouTube"
+          >
+            <Icon
+              name="youtube"
+              class="w-5 h-5 text-neutral-700 dark:text-white hover:text-red-500 transition"
+            />
+          </a>
+        )
+      }
+    </div>
+
+    <div class="flex flex-wrap gap-2 text-xs text-white">
+      {
+        tech.map((t) => (
+          <span class="bg-neutral-700 dark:bg-neutral-600 px-2 py-1 rounded-full">
+            {t}
+          </span>
+        ))
+      }
+    </div>
+  </div>
+</div>

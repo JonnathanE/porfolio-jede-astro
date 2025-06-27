@@ -1,37 +1,214 @@
 ---
-import ExperienceItem from "./ExperienceItem.astro";
+import SectionContainer from "@/components/SectionContainer.astro";
+import TitleSection from "@/components/TitleSection.astro";
 
-const EXPERIENCE = [
+// Tipado
+type WorkType =
+  | "Jornada Completa"
+  | "Medio Tiempo"
+  | "Freelance"
+  | "Profesional Independiente"
+  | "Contrato Temporal"
+  | "Prácticas"
+  | "Formación"
+  | "Temporal";
+
+type LocationType = "Remoto" | "Presencial" | "Híbrido";
+
+type MonthName =
+  | "Enero"
+  | "Febrero"
+  | "Marzo"
+  | "Abril"
+  | "Mayo"
+  | "Junio"
+  | "Julio"
+  | "Agosto"
+  | "Septiembre"
+  | "Octubre"
+  | "Noviembre"
+  | "Diciembre";
+
+interface Experience {
+  startMonth: MonthName;
+  startYear: number;
+  endMonth: MonthName | null;
+  endYear: number | null;
+  currentlyWorking: boolean;
+  title: string;
+  company: string;
+  location: string;
+  workType: WorkType;
+  locationType: LocationType;
+  description: string;
+  tech: string[];
+}
+
+// data
+
+const EXPERIENCE: Experience[] = [
   {
-    date: "Agosto 2022 - Actualidad",
+    startMonth: "Agosto",
+    startYear: 2022,
+    endMonth: null,
+    endYear: null,
+    currentlyWorking: true,
     title: "Desarrollador Full Stack",
-    empresa: "Tecnofin Tecnología e Innovación S.A.S.",
+    company: "Tecnofin Tecnología e Innovación S.A.S.",
+    location: "Quito, Pichincha, Ecuador",
+    workType: "Jornada Completa",
+    locationType: "Remoto",
     description:
       "Responsable del desarrollo y mantenimiento de la aplicación web CARTERA365, orientada a la gestión de créditos. Encargado de la creación de APIs REST y interfaces de usuario, integrando funcionalidades clave para la experiencia del cliente. Administración de bases de datos en SQL Server, incluyendo diseño, optimización y consultas avanzadas. Análisis de requerimientos y propuesta de soluciones técnicas eficientes alineadas con los objetivos del cliente. Supervisión de nuevas funcionalidades (features) y correcciones (fixes) implementadas en el proyecto. Gestión de despliegue, monitoreo y mantenimiento en servidores AWS. Además, participé en el diseño y construcción de un Data Warehouse (DW), implementando procesos ETL mediante SSIS y liderando migraciones de datos críticas para la operación del sistema. Desarrollo e integración de un chatbot automatizado para WhatsApp utilizando n8n, mejorando la interacción y soporte al cliente.",
-    link: null,
+    tech: [
+      "Django",
+      "React.js",
+      "Bootstrap",
+      "SQL Server",
+      "SSIS (ETL)",
+      "AWS Lightsail",
+      "Docker",
+      "n8n",
+    ],
   },
   {
-    date: "Enero 2025 - Febrero 2025",
+    startMonth: "Enero",
+    startYear: 2025,
+    endMonth: "Marzo",
+    endYear: 2025,
+    currentlyWorking: false,
     title: "Desarrollador Web WordPress",
-    empresa: "Fastline Cia.Ltda",
+    company: "Fastline Cia.Ltda",
+    location: "Quito, Pichincha, Ecuador",
+    workType: "Freelance",
+    locationType: "Remoto",
     description:
       "Participación en el desarrollo de una Intranet corporativa utilizando WordPress como CMS principal. Uso de Elementor como constructor de páginas para crear plantillas y componentes reutilizables basados en diseños provenientes de Figma, garantizando coherencia visual y funcionalidad. Evaluación, prueba y configuración de distintos plugins para cumplir con los requerimientos específicos del proyecto. Desarrollo de funcionalidades personalizadas mediante Code Snippets en PHP, adaptando la plataforma a necesidades particulares del cliente.",
-    link: null,
+    tech: ["WordPress", "Elementor", "PHP", "JavaScript", "HTML", "CSS"],
+  },
+  {
+    startMonth: "Septiembre",
+    startYear: 2021,
+    endMonth: "Septiembre",
+    endYear: 2022,
+    currentlyWorking: false,
+    title: "Desarrollador Full Stack (Proyecto de Titulación)",
+    company: "Universidad Nacional de Loja",
+    location: "Loja, Loja, Ecuador",
+    workType: "Formación",
+    locationType: "Remoto",
+    description:
+      "Desarrollo de una aplicación web educativa para la enseñanza de la Lengua de Señas Ecuatoriana, orientada a todo tipo de usuarios, inspirada en plataformas como Duolingo. La aplicación incluyó lecciones interactivas, pruebas por nivel, progreso del usuario y diseño accesible. Participé en todas las etapas del desarrollo: análisis de requerimientos, diseño de interfaz, implementación del backend, base de datos NoSQL y despliegue. El proyecto fue presentado como trabajo de titulación para la carrera de Ingeniería en Sistemas.",
+    tech: ["Express.js", "MongoDB", "React.js", "Tailwind CSS"],
   },
 ];
+
+function formatRange(exp: Experience) {
+  return `${exp.startMonth} ${exp.startYear} - ${
+    exp.currentlyWorking ? "Actualidad" : `${exp.endMonth} ${exp.endYear}`
+  }`;
+}
 ---
 
-<ol class="relative border-s border-gray-200 dark:border-gray-700 ml-3">
-  {
-    EXPERIENCE.map((experiencie) => (
-      <li class="mb-10 ms-4">
-        <ExperienceItem
-          date={experiencie.date}
-          title={experiencie.title}
-          description={experiencie.description}
-          link={experiencie.link}
-        />
-      </li>
-    ))
-  }
-</ol>
+<SectionContainer id="experience">
+  <TitleSection title="Experiencia" />
+  <ol
+    class="relative border-l border-neutral-300 dark:border-neutral-700 my-10"
+  >
+    {
+      EXPERIENCE.map((exp) => (
+        <li class="mb-12 ml-6">
+          <div class="absolute w-3 h-3 bg-blue-600 rounded-full -left-1.5 border border-white dark:border-neutral-900" />
+
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h3 class="text-lg font-semibold text-neutral-800 dark:text-white">
+                {exp.title}
+                <span class="text-sm text-neutral-500 dark:text-neutral-400">
+                  {" "}
+                  – {exp.company} · {exp.workType}
+                </span>
+              </h3>
+
+              <div class="text-sm text-neutral-500 dark:text-neutral-400">
+                {formatRange(exp)} ·
+                <span
+                  class="ml-1"
+                  data-start-month={exp.startMonth}
+                  data-start-year={exp.startYear}
+                  data-end-month={exp.endMonth}
+                  data-end-year={exp.endYear}
+                  data-currently={exp.currentlyWorking}
+                >
+                  Calculando...
+                </span>
+              </div>
+
+              <p class="text-sm text-neutral-600 dark:text-neutral-300">
+                {exp.location} · {exp.locationType}
+              </p>
+            </div>
+          </div>
+
+          <details class="group mt-2">
+            <summary class="cursor-pointer text-sm text-neutral-700 dark:text-neutral-300 line-clamp-5 group-open:line-clamp-none transition-all duration-300">
+              {exp.description}
+            </summary>
+          </details>
+
+          <div class="mt-4 flex flex-wrap gap-2 text-xs">
+            {exp.tech.map((tech) => (
+              <span class="bg-neutral-200 dark:bg-neutral-700 text-neutral-800 dark:text-white px-2 py-1 rounded-full">
+                {tech}
+              </span>
+            ))}
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</SectionContainer>
+
+<script type="module">
+  const monthMap = {
+    Enero: 0,
+    Febrero: 1,
+    Marzo: 2,
+    Abril: 3,
+    Mayo: 4,
+    Junio: 5,
+    Julio: 6,
+    Agosto: 7,
+    Septiembre: 8,
+    Octubre: 9,
+    Noviembre: 10,
+    Diciembre: 11,
+  };
+
+  document.querySelectorAll("[data-start-month]").forEach((span) => {
+    const startMonth = monthMap[span.dataset.startMonth];
+    const startYear = parseInt(span.dataset.startYear);
+    const currently = span.dataset.currently === "true";
+
+    let endMonth, endYear;
+
+    if (!currently) {
+      endMonth = monthMap[span.dataset.endMonth];
+      endYear = parseInt(span.dataset.endYear);
+    } else {
+      const now = new Date();
+      endMonth = now.getMonth();
+      endYear = now.getFullYear();
+    }
+
+    const monthsDiff = (endYear - startYear) * 12 + (endMonth - startMonth);
+    const years = Math.floor(monthsDiff / 12);
+    const months = monthsDiff % 12;
+
+    const parts = [];
+    if (years > 0) parts.push(`${years} año${years > 1 ? "s" : ""}`);
+    if (months > 0) parts.push(`${months} mes${months > 1 ? "es" : ""}`);
+
+    span.textContent = parts.length > 0 ? parts.join(" y ") : "Menos de un mes";
+  });
+</script>

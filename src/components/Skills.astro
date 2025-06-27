@@ -1,0 +1,159 @@
+---
+import { Picture } from "astro:assets";
+import { Icon } from "astro-icon/components";
+
+import SectionContainer from "@/components/SectionContainer.astro";
+import TitleSection from "@/components/TitleSection.astro";
+---
+
+<SectionContainer id="skill">
+  <TitleSection title="Habilidades" />
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 my-10">
+    <!-- Lenguajes de programación -->
+    <div>
+      <h3
+        class="text-xl font-semibold text-neutral-700 dark:text-neutral-200 mb-4"
+      >
+        Lenguajes de programación
+      </h3>
+      <ul class="space-y-2">
+        <li class="flex items-center gap-2">
+          <Icon name="javascript" class="w-5 h-5" /> JavaScript
+        </li>
+        <li class="flex items-center gap-2">
+          <Icon name="typescript" class="w-5 h-5" /> TypeScript
+        </li>
+        <li class="flex items-center gap-2">
+          <Icon name="python" class="w-5 h-5" /> Python
+        </li>
+        <li class="flex items-center gap-2">
+          <Icon name="html-5" class="w-5 h-5" /> HTML
+        </li>
+        <li class="flex items-center gap-2">
+          <Icon name="css-3" class="w-5 h-5" /> CSS
+        </li>
+        <li class="flex items-center gap-2">
+          <Icon name="sqlite" class="w-5 h-5" /> SQL
+        </li>
+      </ul>
+    </div>
+
+    <!-- Frameworks y Librerías -->
+    <div>
+      <h3
+        class="text-xl font-semibold text-neutral-700 dark:text-neutral-200 mb-4"
+      >
+        Frameworks y Librerías
+      </h3>
+      <ul class="space-y-2">
+        <li class="flex items-center gap-2">
+          <Icon name="react" class="w-5 h-5" /> React.js
+        </li>
+        <li class="flex items-center gap-2">
+          <Icon name="angular" class="w-5 h-5" /> Angular
+        </li>
+        <li class="flex items-center gap-2">
+          <Icon name="astro" class="w-5 h-5" /> Astro
+        </li>
+        <li class="flex items-center gap-2">
+          <Icon name="django" class="w-5 h-5" /> Django
+        </li>
+        <li class="flex items-center gap-2">
+          <Icon name="express" class="w-5 h-5" /> Express
+        </li>
+      </ul>
+    </div>
+
+    <!-- Herramientas y Tecnologías -->
+    <div>
+      <h3
+        class="text-xl font-semibold text-neutral-700 dark:text-neutral-200 mb-4"
+      >
+        Herramientas y Tecnologías
+      </h3>
+      <ul class="space-y-2">
+        <li class="flex items-center gap-2">
+          <Icon name="nodejs" class="w-5 h-5" /> Node.js
+        </li>
+        <li class="flex items-center gap-2">
+          <Icon name="supabase" class="w-5 h-5" /> Supabase
+        </li>
+        <li class="flex items-center gap-2">
+          <Icon name="docker" class="w-5 h-5" /> Docker
+        </li>
+        <li class="flex items-center gap-2">
+          <Icon name="git" class="w-5 h-5" /> Git
+        </li>
+        <li class="flex items-center gap-2">
+          <Icon name="GitHub_light" class="w-5 h-5 dark:hidden" /><Icon
+            name="GitHub_dark"
+            class="w-5 h-5 hidden dark:block"
+          /> GitHub
+        </li>
+        <li class="flex items-center gap-2">
+          <Icon name="github-copilot" class="w-5 h-5" /> GitHub Copilot
+        </li>
+        <!-- <li class="flex items-center gap-2">
+          <Icon name="logos/nginx" class="w-5 h-5" /> Nginx
+        </li>
+        <li class="flex items-center gap-2">
+          <Icon name="logos/apache" class="w-5 h-5" /> Apache2
+        </li> -->
+        <li class="flex items-center gap-2">
+          <Icon name="amazonaws" class="w-5 h-5" /> AWS Lightsail
+        </li>
+      </ul>
+    </div>
+
+    <!-- Bases de datos -->
+    <div>
+      <h3
+        class="text-xl font-semibold text-neutral-700 dark:text-neutral-200 mb-4"
+      >
+        Bases de Datos
+      </h3>
+      <ul class="space-y-2">
+        <li class="flex items-center gap-2">
+          <Icon name="postgresql" class="w-5 h-5" /> PostgreSQL
+        </li>
+        <li class="flex items-center gap-2">
+          <Icon name="mongodb" class="w-5 h-5" /> MongoDB
+        </li>
+        <li class="flex items-center gap-2">
+          <Icon name="microsoft-sql-server" class="w-5 h-5" /> SQL Server
+        </li>
+      </ul>
+    </div>
+
+    <!-- Estilos y UI -->
+    <div>
+      <h3
+        class="text-xl font-semibold text-neutral-700 dark:text-neutral-200 mb-4"
+      >
+        Estilos y UI
+      </h3>
+      <ul class="space-y-2">
+        <li class="flex items-center gap-2">
+          <Icon name="tailwindcss" class="w-5 h-5" /> Tailwind CSS
+        </li>
+        <li class="flex items-center gap-2">
+          <Icon name="bootstrap" class="w-5 h-5" /> Bootstrap
+        </li>
+      </ul>
+    </div>
+
+    <!-- ETL -->
+    <div>
+      <h3
+        class="text-xl font-semibold text-neutral-700 dark:text-neutral-200 mb-4"
+      >
+        ETL / Data
+      </h3>
+      <ul class="space-y-2">
+        <li class="flex items-center gap-2">
+          <Icon name="microsoft-sql-server" class="w-5 h-5" /> SSIS (ETL)
+        </li>
+      </ul>
+    </div>
+  </div>
+</SectionContainer>
