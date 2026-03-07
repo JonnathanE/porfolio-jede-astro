@@ -1,48 +1,83 @@
-# Astro Starter Kit: Basics
+# Portafolio de Jonnathan Espinoza
 
-```sh
-bun create astro@latest -- --template basics
-```
+Sitio web de portafolio personal construido con Astro, TypeScript y Tailwind CSS v4.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## Stack
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+- Astro 5
+- TypeScript (strict)
+- Tailwind CSS v4
+- astro-icon
+- Bun (gestor de paquetes)
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## Estructura del proyecto
 
 ```text
 /
-├── public/
-│   └── favicon.svg
+├── docs/                       # Documentación interna
+├── public/                     # Archivos estáticos (CV, imágenes públicas, favicon)
 ├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
+│   ├── assets/                 # Imágenes y assets procesados por Astro
+│   ├── components/
+│   │   ├── sections/           # Secciones principales de la página
+│   │   ├── ui/                 # Componentes reutilizables de interfaz
+│   │   ├── widgets/            # Widgets interactivos (theme toggle, etc.)
+│   │   └── legacy/             # Componentes antiguos/no activos
+│   ├── constants/              # Contenido tipado (nav, experiencia, tecnologías)
+│   ├── icons/                  # Íconos SVG para astro-icon
+│   ├── layouts/                # Layout base
+│   ├── pages/                  # Rutas Astro
+│   └── styles/                 # Estilos globales y tokens de tema
+├── astro.config.mjs
+├── tsconfig.json
 └── package.json
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Requisitos
 
-## 🧞 Commands
+- Bun instalado (recomendado para este proyecto)
 
-All commands are run from the root of the project, from a terminal:
+## Instalación
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `bun install`             | Installs dependencies                            |
-| `bun dev`             | Starts local dev server at `localhost:4321`      |
-| `bun build`           | Build your production site to `./dist/`          |
-| `bun preview`         | Preview your build locally, before deploying     |
-| `bun astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `bun astro -- --help` | Get help using the Astro CLI                     |
+```bash
+bun install
+```
 
-## 👀 Want to learn more?
+## Desarrollo
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+```bash
+bun run dev
+```
+
+Servidor local en `http://localhost:4321`.
+
+## Build y preview
+
+```bash
+bun run build
+bun run preview
+```
+
+## Diagnóstico de tipos y Astro
+
+```bash
+bun run astro check
+```
+
+## Scripts disponibles
+
+- `bun run dev`: inicia servidor de desarrollo.
+- `bun run build`: genera build de producción en `dist/`.
+- `bun run preview`: previsualiza el build localmente.
+- `bun run astro`: ejecuta comandos del CLI de Astro.
+
+## Convenciones importantes
+
+- UI en español (tono principal del contenido).
+- Preferir imports con alias definidos en `tsconfig.json` (`@/`, `@components/`, etc.).
+- No editar manualmente `dist/` (salida generada).
+- Mantener tipado estricto y evitar `any`.
+
+## Documentación adicional
+
+- Arquitectura del proyecto: `docs/architecture.md`

@@ -6,8 +6,12 @@ import { Icon } from "astro-icon/components";
     id="btnTheme"
     class="cursor-pointer flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 hover:bg-surface-alt"
 >
-    <Icon name="moon" size={24} class="w-6 dark:hidden text-gray-700" />
-    <Icon name="sun" size={24} class="w-6 hidden dark:block text-white" />
+    <span class="w-6 dark:hidden text-gray-700">
+        <Icon name="moon" size={24} />
+    </span>
+    <span class="w-6 hidden dark:block text-white">
+        <Icon name="sun" size={24} />
+    </span>
 </button>
 
 <script>
