@@ -1,0 +1,118 @@
+---
+import { Picture } from "astro:assets";
+import { Icon } from "astro-icon/components";
+
+import SectionContainer from "@/components/sections/SectionContainer.astro";
+
+import ProfileImg from "@assets/images/about-character-v3.png";
+---
+
+<SectionContainer id="about">
+    <div class="flex w-full flex-col lg:flex-row items-start gap-12 lg:gap-16">
+        <!-- Right Image Section -->
+        <div class="hidden lg:block shrink-0 w-full lg:w-auto mx-auto lg:mx-0">
+            <div class="relative max-w-sm mx-auto">
+                <Picture
+                    src={ProfileImg}
+                    alt="Profile character illustration"
+                    quality="high"
+                    formats={["webp", "jpg"]}
+                    class="w-full rounded-3xl border-2 border-muted/20 dark:border-white/10 shadow-xl"
+                />
+            </div>
+        </div>
+        <!-- Left Content Section -->
+        <div class="flex-1 space-y-8">
+            <!-- Subtitle -->
+            <p
+                class="text-base font-medium tracking-wider text-muted uppercase"
+            >
+                Sobre mí
+            </p>
+
+            <!-- Main Title with underline -->
+            <div>
+                <h2
+                    class="text-3xl sm:text-4xl lg:text-5xl font-bold text-text leading-tight mb-3"
+                >
+                    Construyendo Sistemas Escalables
+                </h2>
+                <div class="w-24 h-1 bg-accent"></div>
+            </div>
+
+            <!-- Description Paragraphs -->
+            <div class="space-y-4 max-w-2xl">
+                <p class="leading-relaxed">
+                    ¡Hola! Soy Jonnathan Espinoza, Ingeniero en Sistemas por la
+                    UNL y desarrollador Full Stack especializado en Backend.
+                </p>
+                <p class="leading-relaxed">
+                    Mi camino empezó con la curiosidad de saber cómo se hacían
+                    los videojuegos y hoy diseño sistemas web completos, desde
+                    la arquitectura del servidor hasta la interfaz.
+                </p>
+                <p class="leading-relaxed">
+                    Mi meta: convertirme en Arquitecto de Software.
+                </p>
+            </div>
+
+            <!-- What Drives Me Section -->
+            <div class="pt-6">
+                <h3 class="text-xl sm:text-2xl font-bold text-text mb-6">
+                    Lo que me impulsa
+                </h3>
+
+                <div
+                    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6"
+                >
+                    <!-- Languages Card -->
+                    <div
+                        class="group border border-muted/30 dark:border-white/20 rounded-xl p-6 hover:border-primary/50 transition-all duration-300 hover:shadow-lg"
+                    >
+                        <h4
+                            class="font-semibold text-text mb-2 flex items-center gap-2"
+                        >
+                            <Icon name="code" size={20} />
+                            Código
+                        </h4>
+                        <p class="text-sm text-muted leading-relaxed">
+                            JavaScript, TypeScript, Python, SQL, ReactJS,
+                            NestJS, Astro, NodeJS
+                        </p>
+                    </div>
+
+                    <!-- Education Card -->
+                    <div
+                        class="group border border-muted/30 dark:border-white/20 rounded-xl p-6 hover:border-primary/50 transition-all duration-300 hover:shadow-lg"
+                    >
+                        <h4
+                            class="font-semibold text-text mb-2 flex items-center gap-2"
+                        >
+                            <Icon name="school" size={20} />
+                            Educación
+                        </h4>
+                        <p class="text-sm text-muted leading-relaxed">
+                            Ingeniero en Sistemas por la Universidad Nacional de
+                            Loja
+                        </p>
+                    </div>
+
+                    <!-- Projects Card -->
+                    <div
+                        class="group border border-muted/30 dark:border-white/20 rounded-xl p-6 hover:border-primary/50 transition-all duration-300 hover:shadow-lg sm:col-span-2 lg:col-span-1"
+                    >
+                        <h4
+                            class="font-semibold text-text mb-2 flex items-center gap-2"
+                        >
+                            <Icon name="language" size={20} />
+                            Idiomas
+                        </h4>
+                        <p class="text-sm text-muted leading-relaxed">
+                            Español (Nativo), Inglés (Intermedio)
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</SectionContainer>

@@ -1,0 +1,174 @@
+---
+import { Picture } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import Button from "../ui/Button.astro";
+import { socialLinks } from "@/constants/socialLinks";
+
+import HeroCharacter from "@assets/images/hero-character.jpg";
+---
+
+<section
+    id="home"
+    class="relative min-h-screen flex items-center overflow-hidden"
+>
+    <div
+        class="px-6 lg:px-16 grid grid-cols-1 lg:grid-cols-2 gap-1 items-center pt-28 pb-16"
+    >
+        <!-- ── Left column ── -->
+        <div class="flex flex-col gap-6 animate-fade-up">
+            <!-- Available badge -->
+            <div
+                class="inline-flex items-center gap-2 self-start px-4 py-1.5 rounded-full border border-surface-alt text-sm text-muted"
+            >
+                <span class="relative flex h-2 w-2">
+                    <span
+                        class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"
+                    ></span>
+                    <span
+                        class="relative inline-flex rounded-full h-2 w-2 bg-green-400"
+                    ></span>
+                </span>
+                Disponible para trabajos independientes
+            </div>
+
+            <!-- Name -->
+            <h1
+                class="text-5xl font-bold text-text leading-tight tracking-tight"
+            >
+                Hola, Soy <span class="text-primary">Jonnathan Espinoza</span>
+            </h1>
+
+            <!-- Roles -->
+            <div class="flex items-center gap-3 flex-wrap">
+                <!-- <span class="text-lg font-medium text-text/70">Roles:</span> -->
+                <span class="px-4 py-2 rounded-lg text-primary font-medium"
+                    >Backend Dev</span
+                >
+                <span class="px-4 py-2 rounded-lg text-primary font-medium"
+                    >Freelancer</span
+                >
+                <span class="px-4 py-2 rounded-lg text-primary font-medium"
+                    >Frontend Dev</span
+                >
+            </div>
+
+            <!-- Description -->
+            <p class="text-base lg:text-lg leading-relaxed">
+                Con +3 años de experiencia, diseño arquitecturas robustas y
+                escalables integradas con interfaces fluidas. Transformo lógica
+                compleja en experiencias digitales impecables.
+            </p>
+
+            <!-- Meta info -->
+            <!-- <div class="flex items-center gap-4">
+                <span class="flex items-center gap-1.5">
+                    <Icon
+                        name="map-marker"
+                        size={16}
+                        class="w-4 h-4 text-primary"
+                    />
+                    Ecuador
+                </span>
+                <span class="flex items-center gap-1.5">
+                    <Icon
+                        name="briefcase-check"
+                        size={16}
+                        class="w-4 h-4 text-primary"
+                    />
+                    Disponible ahora
+                </span>
+            </div> -->
+
+            <!-- CTA buttons -->
+            <div class="flex items-center gap-3 flex-wrap">
+                <Button
+                    href="mailto:jonaes930@gmail.com"
+                    variant="primary"
+                    size="md"
+                    target="_blank"
+                >
+                    <Icon name="email-plus" size={16} />
+                    Contáctame
+                </Button>
+                <Button
+                    href="/documents/CV-Jonnathan-Espinoza-es.pdf"
+                    variant="outline"
+                    size="md"
+                    target="_blank"
+                >
+                    <Icon name="download-outline" size={16} />
+                    Descargar CV
+                </Button>
+            </div>
+
+            <!-- Divider -->
+            <hr class="border-text/20 w-full" />
+
+            <!-- Social links -->
+            <div class="flex items-center gap-4 text-base lg:text-lg">
+                <span class="">Sígueme:</span>
+                {
+                    socialLinks.map(({ icon, href, label }) => (
+                        <a
+                            href={href}
+                            class="hover:text-text hover:scale-110 transition-all duration-200"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={label}
+                        >
+                            <Icon name={icon} size={20} />
+                        </a>
+                    ))
+                }
+            </div>
+        </div>
+
+        <!-- ── Right column: character image ── -->
+        <div class="relative flex justify-center animate-fade-left">
+            <!-- Soft blob behind image -->
+            <div class="absolute inset-0 flex items-center justify-center">
+                <div class="w-72 h-72 rounded-full bg-primary/10 blur-3xl">
+                </div>
+            </div>
+
+            <div class="relative z-10 w-72 lg:w-96">
+                <Picture
+                    src={HeroCharacter}
+                    alt="Foto de Jonnathan Espinoza"
+                    quality="high"
+                    formats={["webp", "jpg"]}
+                    class="w-full drop-shadow-2xl select-none"
+                />
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    @keyframes fade-up {
+        from {
+            opacity: 0;
+            transform: translateY(24px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    @keyframes fade-left {
+        from {
+            opacity: 0;
+            transform: translateX(24px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    .animate-fade-up {
+        animation: fade-up 0.7s ease both;
+    }
+    .animate-fade-left {
+        animation: fade-left 0.7s ease 0.2s both;
+    }
+</style>

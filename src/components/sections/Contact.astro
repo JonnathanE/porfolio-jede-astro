@@ -1,0 +1,42 @@
+---
+import { Icon } from "astro-icon/components";
+
+import SectionContainer from "@/components/sections/SectionContainer.astro";
+import TitleSection from "@/components/sections/TitleSection.astro";
+---
+
+<SectionContainer
+  id="contact"
+  class="bg-[url('/images/footer-bg-color.png')] bg-no-repeat bg-[lenght:90%_auto] bg-center dark:bg-none"
+>
+  <TitleSection
+    subtitle="CONTACTO"
+    title="Ponte en contacto con migo"
+    description="Siempre estoy abierto a discutir proyectos emocionantes y nuevas oportunidades. ¡Colaboremos!"
+  />
+  <form action="" class="max-w-2xl mx-auto">
+    <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE" />
+    <div class="grid grid-cols-2 gap-6 mt-10 mb-8">
+      <input
+        type="text"
+        placeholder="Enter your name"
+        class="flex-1 p-3 outline-none border-[0.5px] border-gray-400 rounded-md dark:border-white/90 dark:text-white"
+      />
+      <input
+        type="email"
+        placeholder="Enter your email"
+        class="flex-1 p-3 outline-none border-[0.5px] border-gray-400 rounded-md dark:border-white/90 dark:text-white"
+      />
+    </div>
+    <textarea
+      rows="6"
+      placeholder="Enter your message"
+      class="w-full p-4 outline-none border-[0.5px] border-gray-400 rounded-md mb-6 dark:border-white/90 dark:text-white"
+    ></textarea>
+    <button
+      class="py-3 px-8 w-max flex items-center justify-between gap-2 bg-black/80 text-white rounded-full mx-auto cursor-pointer hover:bg-black duration-500 dark:bg-transparent dark:border-[0.5px] dark:hover:bg-darkTheme"
+      >Enviar mensaje
+      <Icon name="arrow-right" size={24} />
+    </button>
+  </form>
+</SectionContainer>

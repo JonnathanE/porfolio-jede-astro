@@ -1,0 +1,115 @@
+---
+import SectionContainer from "@/components/sections/SectionContainer.astro";
+import TitleSection from "@/components/sections/TitleSection.astro";
+import { EXPERIENCE, type Experience } from "@/constants/experience";
+
+function formatRange(exp: Experience) {
+  return `${exp.startMonth} ${exp.startYear} - ${
+    exp.currentlyWorking ? "Actualidad" : `${exp.endMonth} ${exp.endYear}`
+  }`;
+}
+---
+
+<SectionContainer id="experience">
+  <TitleSection
+    title="Construyendo soluciones reales, línea a línea"
+    subtitle="EXPERIENCIA"
+    description="Un recorrido por los proyectos y retos técnicos que han dado forma a mi carrera profesional"
+  />
+  <ol
+    class="relative border-l border-neutral-300 dark:border-neutral-700 my-10"
+  >
+    {
+      EXPERIENCE.map((exp) => (
+        <li class="mb-12 ml-6">
+          <div class="absolute w-3 h-3 bg-primary rounded-full -left-1.5 border border-white dark:border-neutral-900" />
+
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h3 class="text-lg font-semibold text-text">{exp.title}</h3>
+              <span class="text-sm text-text">
+                {exp.company} · {exp.workType}
+              </span>
+
+              <div class="text-sm text-muted/80">
+                {formatRange(exp)} ·
+                <span
+                  class="ml-1"
+                  data-start-month={exp.startMonth}
+                  data-start-year={exp.startYear}
+                  data-end-month={exp.endMonth}
+                  data-end-year={exp.endYear}
+                  data-currently={exp.currentlyWorking}
+                >
+                  Calculando...
+                </span>
+              </div>
+
+              <p class="text-sm text-muted/80">
+                {exp.location} · {exp.locationType}
+              </p>
+            </div>
+          </div>
+
+          <details class="group mt-2">
+            <summary class="cursor-pointer text-sm text-text line-clamp-5 group-open:line-clamp-none transition-all duration-300">
+              {exp.description}
+            </summary>
+          </details>
+
+          <div class="mt-4 flex flex-wrap gap-2 text-xs">
+            {exp.tech.map((tech) => (
+              <span class="bg-neutral-200 dark:bg-neutral-700 text-neutral-800 dark:text-white px-2 py-1 rounded-full">
+                {tech}
+              </span>
+            ))}
+          </div>
+        </li>
+      ))
+    }
+  </ol>
+</SectionContainer>
+
+<script type="module">
+  const monthMap = {
+    Enero: 0,
+    Febrero: 1,
+    Marzo: 2,
+    Abril: 3,
+    Mayo: 4,
+    Junio: 5,
+    Julio: 6,
+    Agosto: 7,
+    Septiembre: 8,
+    Octubre: 9,
+    Noviembre: 10,
+    Diciembre: 11,
+  };
+
+  document.querySelectorAll("[data-start-month]").forEach((span) => {
+    const startMonth = monthMap[span.dataset.startMonth];
+    const startYear = parseInt(span.dataset.startYear);
+    const currently = span.dataset.currently === "true";
+
+    let endMonth, endYear;
+
+    if (!currently) {
+      endMonth = monthMap[span.dataset.endMonth];
+      endYear = parseInt(span.dataset.endYear);
+    } else {
+      const now = new Date();
+      endMonth = now.getMonth();
+      endYear = now.getFullYear();
+    }
+
+    const monthsDiff = (endYear - startYear) * 12 + (endMonth - startMonth);
+    const years = Math.floor(monthsDiff / 12);
+    const months = monthsDiff % 12;
+
+    const parts = [];
+    if (years > 0) parts.push(`${years} año${years > 1 ? "s" : ""}`);
+    if (months > 0) parts.push(`${months} mes${months > 1 ? "es" : ""}`);
+
+    span.textContent = parts.length > 0 ? parts.join(" y ") : "Menos de un mes";
+  });
+</script>

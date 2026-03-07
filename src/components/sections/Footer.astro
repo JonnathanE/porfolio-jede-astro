@@ -1,0 +1,53 @@
+---
+import { Icon } from "astro-icon/components";
+import { navItems } from "@/constants/navItems";
+import { socialLinks } from "@/constants/socialLinks";
+---
+
+<footer class="mt-20 py-12 bg-text text-surface dark:bg-surface dark:text-text">
+  <div class="max-w-6xl mx-auto px-4">
+    <!-- Name/Logo -->
+    <div class="text-center mb-6">
+      <h2 class="text-2xl font-bold">Jonnathan Espinoza</h2>
+    </div>
+
+    <!-- Navigation Links -->
+    <nav class="mb-6">
+      <ul class="flex flex-wrap items-center justify-center gap-6 text-sm">
+        {
+          navItems.map((item) => (
+            <li>
+              <a href={item.href} class="hover:text-gray-300 transition-colors">
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <!-- Social Links -->
+    <div class="flex items-center justify-center gap-4 mb-6">
+      {
+        socialLinks.map((social) => (
+          <a
+            href={social.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hover:opacity-70 transition-opacity"
+            aria-label={social.label}
+          >
+            <Icon name={social.icon} size={24} />
+          </a>
+        ))
+      }
+    </div>
+
+    <!-- Copyright -->
+    <div class="text-center text-sm text-gray-400">
+      <p>
+        © {new Date().getFullYear()} Jonnathan Espinoza. All Rights Reserved
+      </p>
+    </div>
+  </div>
+</footer>

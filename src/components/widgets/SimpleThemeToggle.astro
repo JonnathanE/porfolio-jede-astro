@@ -1,0 +1,33 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<button
+    id="btnTheme"
+    class="cursor-pointer flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 hover:bg-surface-alt"
+>
+    <Icon name="moon" size={24} class="w-6 dark:hidden text-gray-700" />
+    <Icon name="sun" size={24} class="w-6 hidden dark:block text-white" />
+</button>
+
+<script>
+    // dark mode toggle - Initialize theme on load
+    document.documentElement.classList.toggle(
+        "dark",
+        localStorage.theme === "dark" ||
+            (!("theme" in localStorage) &&
+                window.matchMedia("(prefers-color-scheme: dark)").matches),
+    );
+
+    function toggleTheme() {
+        document.documentElement.classList.toggle("dark");
+        if (document.documentElement.classList.contains("dark")) {
+            localStorage.theme = "dark";
+        } else {
+            localStorage.theme = "light";
+        }
+    }
+
+    const btnTheme = document.querySelector("#btnTheme") as HTMLButtonElement;
+    btnTheme?.addEventListener("click", toggleTheme);
+</script>
