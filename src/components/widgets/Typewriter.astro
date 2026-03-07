@@ -1,0 +1,57 @@
+---
+// Roles that cycle in the typewriter
+const roles = ["Backend Dev", "Frontend Dev", "Freelancer"];
+---
+
+<h2
+    class="text-2xl lg:text-3xl font-semibold text-text/80 font-mono flex items-center gap-1 h-10"
+>
+    <span id="typewriter"></span>
+    <span class="inline-block w-0.5 h-7 bg-primary animate-blink ml-0.5"></span>
+</h2>
+
+<!-- ─── Typewriter script ─── -->
+<script define:vars={{ roles }}>
+    const el = document.getElementById("typewriter");
+    let roleIdx = 0;
+    let charIdx = 0;
+    let deleting = false;
+
+    function type() {
+        const current = roles[roleIdx];
+        el.textContent = deleting
+            ? current.substring(0, charIdx--)
+            : current.substring(0, charIdx++);
+
+        let delay = deleting ? 60 : 110;
+
+        if (!deleting && charIdx > current.length) {
+            delay = 1800;
+            deleting = true;
+        } else if (deleting && charIdx === 0) {
+            deleting = false;
+            roleIdx = (roleIdx + 1) % roles.length;
+            delay = 400;
+        }
+
+        setTimeout(type, delay);
+    }
+
+    type();
+</script>
+
+<style>
+    @keyframes blink {
+        0%,
+        100% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0;
+        }
+    }
+
+    .animate-blink {
+        animation: blink 1s step-end infinite;
+    }
+</style>

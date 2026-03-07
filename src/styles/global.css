@@ -2,54 +2,61 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/*
-Primary
-#489DBA
-rgb(72, 157, 186)
-hsl(195, 45%, 51%)
+@theme {
+    /*Typography*/
+    --font-sans: "Onest Variable", sans-serif;
 
-Secondary
-#DACD9E
-rgb(218, 205, 158)
-hsl(47, 45%, 74%)
+    /*Colors*/
+    --color-primary: var(--color-primary-value);
+    --color-accent: var(--color-accent-value);
+    --color-surface: var(--color-surface-value);
+    --color-surface-alt: var(--color-surface-alt-value);
+    --color-text: var(--color-text-value);
+    --color-muted: var(--color-muted-value);
 
-Accent
-#1A1A15
-rgb(26, 26, 21)
-hsl(60, 11%, 9%)
+    /* Spacing */
+    --spacing-section: 5rem;
 
-Backgroud dark theme color
-Hex: #030711
-Oklch: oklch(12.88% 0.025 260.23)
-*/
-
-@theme inline {
-  --font-sans: "Onest Variable", sans-serif;
-  --color-darkTheme: oklch(12.88% 0.025 260.23);
-
-  --color-primary: rgb(72, 157, 186);
-  --color-secondary: rgb(218, 205, 158);
-  --color-accent: rgb(26, 26, 21);
+    /* Border radius */
+    --radius-card: 1rem;
 }
 
 :root {
-  color-scheme: light dark;
+    color-scheme: light;
+
+    --color-primary-value: #6366f1;
+    --color-accent-value: #f59e0b;
+    --color-surface-value: #ffffff;
+    --color-surface-alt-value: #f1f5f9;
+    /* --color-text-value: #0f172a; */
+    --color-text-value: #0a0a0a;
+    /* --color-muted-value: #64748b; */
+    --color-muted-value: #262626;
 }
 
-.dark {
+:root.dark {
+    --color-primary-value: #818cf8;
+    --color-accent-value: #fbbf24;
+    /* --color-surface-value: #0f172a; */
+    --color-surface-value: #171717;
+    --color-surface-alt-value: #1e293b;
+    /* --color-text-value: #f1f5f9; */
+    --color-text-value: #ffffff;
+    /* --color-muted-value: #94a3b8; */
+    --color-muted-value: #e5e5e5;
 }
 
 html {
-  font-family: var(--font-sans);
-  scroll-behavior: smooth;
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
 }
 
 body {
-  overflow-x: hidden;
+    overflow-x: hidden;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+    html {
+        scroll-behavior: auto;
+    }
 }

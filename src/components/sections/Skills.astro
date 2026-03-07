@@ -1,0 +1,112 @@
+---
+import { Icon } from "astro-icon/components";
+
+import SectionContainer from "@/components/sections/SectionContainer.astro";
+import TitleSection from "@/components/sections/TitleSection.astro";
+import {
+    programmingLanguages,
+    frameworksAndLibraries,
+    databases,
+    toolsAndTechnologies,
+    styleUiTechnologies,
+    etlTechnologies,
+} from "@/constants/technologies";
+---
+
+<SectionContainer id="skills">
+    <TitleSection
+        title="Sistemas potentes, experiencias funcionales"
+        subtitle="HABILIDADES"
+        description="Una muestra de mis habilidades y experiencia en diversos lenguajes de programación, frameworks y herramientas."
+    />
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 my-10">
+        <!-- Lenguajes de programación -->
+        <div>
+            <h3 class="text-xl font-semibold text-text mb-4">
+                Lenguajes de programación
+            </h3>
+            <ul class="space-y-2">
+                {
+                    programmingLanguages.map((tech) => (
+                        <li class="flex items-center gap-2">
+                            <Icon name={tech.icon} size={20} /> {tech.name}
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
+
+        <!-- Frameworks y Librerías -->
+        <div>
+            <h3 class="text-xl font-semibold text-text mb-4">
+                Frameworks y Librerías
+            </h3>
+            <ul class="space-y-2">
+                {
+                    frameworksAndLibraries.map((tech) => (
+                        <li class="flex items-center gap-2">
+                            <Icon name={tech.icon} size={20} /> {tech.name}
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
+
+        <!-- Herramientas y Tecnologías -->
+        <div>
+            <h3 class="text-xl font-semibold text-text mb-4">
+                Herramientas y Tecnologías
+            </h3>
+            <ul class="space-y-2">
+                {
+                    toolsAndTechnologies.map((tech) => (
+                        <li class="flex items-center gap-2">
+                            <Icon name={tech.icon} size={20} />
+                            {tech.name}
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
+
+        <!-- Bases de datos -->
+        <div>
+            <h3 class="text-xl font-semibold text-text mb-4">Bases de Datos</h3>
+            <ul class="space-y-2">
+                {
+                    databases.map((tech) => (
+                        <li class="flex items-center gap-2">
+                            <Icon name={tech.icon} size={20} /> {tech.name}
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
+        <!-- Estilos y UI -->
+        <div>
+            <h3 class="text-xl font-semibold text-text mb-4">Estilos y UI</h3>
+            <ul class="space-y-2">
+                {
+                    styleUiTechnologies.map((tech) => (
+                        <li class="flex items-center gap-2">
+                            <Icon name={tech.icon} size={20} /> {tech.name}
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
+        <!-- ETL/DATA -->
+        <div>
+            <h3 class="text-xl font-semibold text-text mb-4">ETL/DATA</h3>
+            <ul class="space-y-2">
+                {
+                    etlTechnologies.map((tech) => (
+                        <li class="flex items-center gap-2">
+                            <Icon name={tech.icon} size={20} /> {tech.name}
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
+    </div>
+</SectionContainer>
