@@ -1,0 +1,49 @@
+---
+import PageLayout from "@layouts/PageLayout.astro";
+import PageHeader from "@/components/ui/PageHeader.astro";
+import Tag from "@/components/ui/Tag.astro";
+import PostCard from "@/components/cards/PostCard.astro";
+import { POSTS } from "@/constants/posts";
+
+const featured = POSTS.find((post) => post.featured) ?? POSTS[0];
+const rest = POSTS.filter((post) => post !== featured);
+---
+
+<PageLayout
+    title="Blog | Jonnathan Espinoza"
+    description="Notas, guías y reflexiones sobre desarrollo de software."
+>
+    <div class="mx-auto flex max-w-280 flex-col gap-10 px-6 pt-16 pb-20">
+        <PageHeader
+            eyebrow="Escribo sobre lo que aprendo"
+            title="Blog"
+            description="Notas, guías y reflexiones sobre desarrollo de software."
+        />
+
+        {
+            featured && (
+                <a
+                    href={`/blog/${featured.slug}`}
+                    class="flex flex-col gap-4 rounded-3xl border border-line bg-surface-alt p-8 md:p-10"
+                >
+                    <Tag variant="accent" class="self-start">
+                        Destacado · {featured.category}
+                    </Tag>
+                    <h2 class="text-3xl font-extrabold leading-tight tracking-tight">
+                        {featured.title}
+                    </h2>
+                    <p class="max-w-2xl text-lg leading-relaxed text-muted">
+                        {featured.excerpt}
+                    </p>
+                    <span class="font-mono text-xs text-muted">
+                        {featured.date} · {featured.readingTime} min de lectura
+                    </span>
+                </a>
+            )
+        }
+
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {rest.map((post) => <PostCard {post} />)}
+        </div>
+    </div>
+</PageLayout>

@@ -1,0 +1,266 @@
+---
+import { Image, Picture } from "astro:assets";
+import { Icon } from "astro-icon/components";
+
+import PageLayout from "@layouts/PageLayout.astro";
+import PageHeader from "@/components/ui/PageHeader.astro";
+import Button from "@/components/ui/Button.astro";
+import Tag from "@/components/ui/Tag.astro";
+import CourseCard from "@/components/cards/CourseCard.astro";
+import { COURSES, COURSES_VISIBLE } from "@/constants/courses";
+import { SITE } from "@/constants/site";
+
+import ProfileImg from "@assets/images/about-character-v3.png";
+import UnlLogo from "@assets/images/unl-logo.jpg";
+import DegreeImg from "@assets/images/titulo-tercer-nivel-unl-ing-sistemas-jonnathan-espinoza.jpeg";
+
+const CERTIFICATE_URL =
+    "https://certificados.unl.edu.ec/titulo/validar/MDAwMDA1ODM2MA";
+
+const pillars = [
+    {
+        title: "Backend sólido",
+        text: "APIs REST, bases de datos y despliegues pensados para crecer sin dolor.",
+    },
+    {
+        title: "Interfaces claras",
+        text: "Frontend accesible y fluido, con atención al detalle.",
+    },
+    {
+        title: "Aprendizaje continuo",
+        text: "Siempre explorando nuevas herramientas y mejores prácticas.",
+    },
+];
+---
+
+<PageLayout
+    title="Perfil | Jonnathan Espinoza"
+    description="Quién es Jonnathan Espinoza, cómo trabaja y qué lo motiva."
+>
+    <div class="mx-auto flex max-w-280 flex-col gap-16 px-6 pt-16 pb-20">
+        <PageHeader
+            eyebrow="Sobre mí"
+            title="Perfil"
+            description="Quién soy, cómo trabajo y qué me mueve."
+        />
+
+        <section class="flex flex-wrap items-start gap-12">
+            <div class="flex min-w-0 flex-1 basis-130 flex-col gap-5">
+                <h2 class="text-3xl font-extrabold leading-tight tracking-tight">
+                    Construyendo experiencias digitales con sentido
+                </h2>
+                <div class="flex flex-wrap gap-2">
+                    {SITE.roles.map((role) => <Tag variant="soft">{role}</Tag>)}
+                </div>
+                <p class="text-lg leading-relaxed text-muted">
+                    ¡Hola! Soy <strong class="font-bold text-primary">{SITE.name}</strong>,
+                    Ingeniero en Sistemas por la UNL y desarrollador Full Stack
+                    especializado en Backend.
+                </p>
+                <p class="text-lg leading-relaxed text-muted">
+                    Mi camino empezó con la curiosidad de saber cómo se hacían
+                    los videojuegos y hoy diseño sistemas web completos, desde
+                    la arquitectura del servidor hasta la interfaz.
+                </p>
+            </div>
+            <div class="flex flex-1 basis-72 justify-center">
+                <Picture
+                    src={ProfileImg}
+                    alt="Ilustración de perfil"
+                    formats={["webp", "jpg"]}
+                    width={700}
+                    class="w-full max-w-sm rounded-3xl border border-line"
+                />
+            </div>
+        </section>
+
+        <section class="flex flex-col gap-6">
+            <div>
+                <span
+                    class="font-mono text-xs font-medium tracking-widest text-primary uppercase"
+                >
+                    Mi forma de trabajar
+                </span>
+                <h2 class="mt-2 flex items-center gap-2.5 text-3xl font-bold">
+                    <Icon name="brain-circuit" size={28} class="text-primary" />
+                    Qué me impulsa
+                </h2>
+            </div>
+            <div class="grid gap-5 md:grid-cols-3">
+                {
+                    pillars.map((pillar) => (
+                        <article class="flex flex-col gap-2.5 rounded-2xl border border-line p-6">
+                            <h3 class="text-xl font-bold">{pillar.title}</h3>
+                            <p class="text-[15px] leading-relaxed text-muted">
+                                {pillar.text}
+                            </p>
+                        </article>
+                    ))
+                }
+            </div>
+        </section>
+
+        <section class="flex flex-col gap-6 border-t border-line pt-12">
+            <div>
+                <span
+                    class="font-mono text-xs font-medium tracking-widest text-primary uppercase"
+                >
+                    Formación académica
+                </span>
+                <h2 class="mt-2 flex items-center gap-2.5 text-3xl font-bold">
+                    <Icon name="school-outline" size={28} class="text-primary" />
+                    Formación
+                </h2>
+            </div>
+            <article
+                class="flex max-w-2xl flex-wrap items-center gap-5 rounded-2xl border border-line bg-surface-alt p-6"
+            >
+                <Image
+                    src={UnlLogo}
+                    alt="Logo de la Universidad Nacional de Loja"
+                    width={80}
+                    height={80}
+                    class="h-20 w-20 shrink-0 rounded-xl border border-line bg-white object-contain p-1"
+                />
+                <div class="flex min-w-0 flex-1 basis-56 flex-col gap-1.5">
+                    <span class="font-mono text-xs text-muted">TÍTULO</span>
+                    <h3 class="text-xl font-bold">Ingeniería en Sistemas</h3>
+                    <span class="text-muted">Universidad Nacional de Loja</span>
+                    <span
+                        class="flex items-center gap-1.5 font-mono text-[13px] text-muted"
+                    >
+                        <Icon name="calendar" size={16} />
+                        Enero 18 del 2023
+                    </span>
+                    <div class="mt-3 flex flex-wrap gap-3">
+                        <Button
+                            type="button"
+                            variant="outline"
+                            id="open-degree"
+                            class="min-h-11! px-4! text-sm"
+                        >
+                            Ver título
+                        </Button>
+                        <Button
+                            href={CERTIFICATE_URL}
+                            target="_blank"
+                            variant="primary"
+                            class="min-h-11! px-4! text-sm"
+                        >
+                            Validar certificado ↗
+                        </Button>
+                    </div>
+                </div>
+            </article>
+            <dialog
+                id="degree-dialog"
+                aria-label="Título de Ingeniería en Sistemas"
+                class="m-auto w-[min(92vw,56rem)] rounded-2xl border border-line bg-surface p-4 text-text backdrop:bg-black/70"
+            >
+                <div class="flex flex-col gap-3">
+                    <div class="flex items-center justify-between gap-4">
+                        <h3 class="text-lg font-bold">
+                            Título de Ingeniería en Sistemas
+                        </h3>
+                        <button
+                            type="button"
+                            id="close-degree"
+                            aria-label="Cerrar"
+                            class="flex h-11 w-11 cursor-pointer items-center justify-center rounded-xl border border-line text-xl hover:bg-surface-alt"
+                        >
+                            ×
+                        </button>
+                    </div>
+                    <Image
+                        src={DegreeImg}
+                        alt="Título de tercer nivel en Ingeniería en Sistemas, Universidad Nacional de Loja"
+                        width={1400}
+                        class="max-h-[75vh] w-full rounded-xl object-contain"
+                    />
+                </div>
+            </dialog>
+        </section>
+
+        <section class="flex flex-col gap-6 border-t border-line pt-12">
+            <div>
+                <span
+                    class="font-mono text-xs font-medium tracking-widest text-primary uppercase"
+                >
+                    Aprendizaje continuo
+                </span>
+                <h2 class="mt-2 flex items-center gap-2.5 text-3xl font-bold">
+                    <Icon name="code-tags" size={28} class="text-primary" />
+                    Cursos
+                </h2>
+            </div>
+            <ul id="courses-list" class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                {
+                    COURSES.map((course, index) => (
+                        <CourseCard
+                            course={course}
+                            class={index >= COURSES_VISIBLE ? "hidden!" : undefined}
+                        />
+                    ))
+                }
+            </ul>
+            {
+                COURSES.length > COURSES_VISIBLE && (
+                    <Button
+                        type="button"
+                        variant="outline"
+                        id="toggle-courses"
+                        aria-expanded="false"
+                        class="min-h-11! self-center px-5! text-sm"
+                    >
+                        Ver todos los cursos ({COURSES.length})
+                    </Button>
+                )
+            }
+        </section>
+
+        <section
+            class="flex flex-col gap-5 rounded-2xl border border-line bg-surface-alt p-8"
+        >
+            <h2 class="text-2xl font-bold">¿Hablamos?</h2>
+            <div class="flex flex-wrap gap-3">
+                <Button href="/contact">Contáctame</Button>
+                <Button href={SITE.cv} variant="outline" target="_blank">
+                    Descargar CV
+                </Button>
+            </div>
+        </section>
+    </div>
+</PageLayout>
+
+<script>
+    const toggleCourses = document.querySelector<HTMLButtonElement>("#toggle-courses");
+    const extraCourses = Array.from(
+        document.querySelectorAll<HTMLElement>("#courses-list > li.hidden\\!"),
+    );
+
+    if (toggleCourses && extraCourses.length > 0) {
+        const collapsedLabel = toggleCourses.textContent?.trim() ?? "";
+        let expanded = false;
+
+        toggleCourses.addEventListener("click", () => {
+            expanded = !expanded;
+            extraCourses.forEach((item) =>
+                item.classList.toggle("hidden!", !expanded),
+            );
+            toggleCourses.setAttribute("aria-expanded", String(expanded));
+            toggleCourses.textContent = expanded ? "Ver menos" : collapsedLabel;
+        });
+    }
+
+    const dialog = document.querySelector<HTMLDialogElement>("#degree-dialog");
+    const openButton = document.querySelector<HTMLButtonElement>("#open-degree");
+    const closeButton = document.querySelector<HTMLButtonElement>("#close-degree");
+
+    if (dialog && openButton && closeButton) {
+        openButton.addEventListener("click", () => dialog.showModal());
+        closeButton.addEventListener("click", () => dialog.close());
+        dialog.addEventListener("click", (event) => {
+            if (event.target === dialog) dialog.close();
+        });
+    }
+</script>

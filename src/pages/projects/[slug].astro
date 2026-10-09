@@ -1,0 +1,113 @@
+---
+import type { GetStaticPaths } from "astro";
+import { Picture } from "astro:assets";
+
+import PageLayout from "@layouts/PageLayout.astro";
+import Button from "@/components/ui/Button.astro";
+import Tag from "@/components/ui/Tag.astro";
+import TechTag from "@/components/ui/TechTag.astro";
+import { PROJECTS, type Project } from "@/constants/projects";
+
+export const getStaticPaths = (() =>
+    PROJECTS.map((project) => ({
+        params: { slug: project.slug },
+        props: { project },
+    }))) satisfies GetStaticPaths;
+
+interface Props {
+    project: Project;
+}
+
+const { project } = Astro.props;
+---
+
+<PageLayout
+    title={`${project.title} | Proyectos`}
+    description={project.summary}
+>
+    <div class="mx-auto flex max-w-215 flex-col gap-8 px-6 pt-12 pb-20">
+        <a
+            href="/projects"
+            class="flex min-h-11 items-center self-start text-[15px] text-muted hover:underline"
+        >
+            ← Volver a proyectos
+        </a>
+
+        <header class="flex flex-col gap-3.5">
+            <span
+                class="font-mono text-xs tracking-widest text-primary font-medium"
+            >
+                PROYECTO
+            </span>
+            <div class="flex flex-wrap items-center gap-3">
+                <h1 class="text-4xl font-extrabold leading-tight tracking-tight md:text-5xl">
+                    {project.title}
+                </h1>
+                <Tag variant="accent">{project.tag}</Tag>
+            </div>
+            <p class="text-lg leading-relaxed text-muted">{project.summary}</p>
+            <span class="font-mono text-[13px] text-muted">{project.date}</span>
+            <div class="mt-1 flex flex-wrap gap-3">
+                {
+                    project.siteUrl && (
+                        <Button href={project.siteUrl} target="_blank">
+                            Ver sitio web ↗
+                        </Button>
+                    )
+                }
+                {
+                    project.repoUrl && (
+                        <Button
+                            href={project.repoUrl}
+                            variant="outline"
+                            target="_blank"
+                        >
+                            Código en GitHub ↗
+                        </Button>
+                    )
+                }
+            </div>
+        </header>
+
+        <Picture
+            src={project.cover}
+            alt={`Captura de ${project.title}`}
+            formats={["webp", "jpg"]}
+            width={1200}
+            class="w-full rounded-2xl border border-line object-cover"
+        />
+
+        <div class="flex flex-wrap items-center gap-2">
+            <Tag variant="soft">{project.category}</Tag>
+            {project.tech.map((id) => <TechTag {id} />)}
+        </div>
+
+        <article class="flex flex-col gap-5">
+            {
+                project.body.map((paragraph) => (
+                    <p class="text-[17px] leading-loose text-muted">
+                        {paragraph}
+                    </p>
+                ))
+            }
+            <h2 class="mt-3 text-2xl font-bold">Características</h2>
+            <ul class="flex list-disc flex-col gap-2 pl-6 text-[17px] leading-relaxed text-muted">
+                {project.features.map((feature) => <li>{feature}</li>)}
+            </ul>
+        </article>
+
+        <div
+            class="flex flex-col items-center gap-3 rounded-2xl border border-line bg-surface-alt px-6 py-9 text-center"
+        >
+            <h2 class="text-2xl font-bold">¿Te interesa un proyecto así?</h2>
+            <p class="text-muted">
+                Explora más de mi trabajo o escríbeme para conversar sobre tu
+                idea.
+            </p>
+            <div class="flex flex-wrap justify-center gap-3">
+                <Button href="/projects">Ver más proyectos</Button>
+                <Button href="/contact" variant="outline">Contáctame</Button>
+            </div>
+        </div>
+    </div>
+</PageLayout>

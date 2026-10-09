@@ -1,0 +1,16 @@
+---
+interface Props {
+    variant?: "chip" | "soft" | "accent";
+    class?: string;
+}
+
+const { variant = "chip", class: className } = Astro.props;
+
+const variants = {
+    chip: "bg-surface-alt text-text rounded-lg px-2.5 py-1 text-[13px]",
+    soft: "bg-primary-soft text-primary rounded-full px-3 py-1 text-[13px] font-bold",
+    accent: "bg-accent text-on-accent rounded-full px-3 py-1 text-[13px] font-bold",
+};
+---
+
+<span class:list={[variants[variant], className]}><slot /></span>

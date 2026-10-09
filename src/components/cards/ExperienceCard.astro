@@ -1,0 +1,35 @@
+---
+import type { Experience } from "@/constants/experience";
+import Tag from "@/components/ui/Tag.astro";
+import TechTag from "@/components/ui/TechTag.astro";
+
+interface Props {
+    experience: Experience;
+}
+
+const { experience: exp } = Astro.props;
+
+const range = `${exp.startMonth} ${exp.startYear} – ${
+    exp.currentlyWorking ? "Actualidad" : `${exp.endMonth} ${exp.endYear}`
+}`;
+---
+
+<li
+    class="flex flex-wrap gap-6 rounded-2xl border border-line bg-surface p-7"
+>
+    <div class="flex basis-56 flex-col gap-2">
+        <span class="font-mono text-[13px] text-muted">{range}</span>
+        <Tag variant="soft" class="self-start">
+            {exp.workType} · {exp.locationType}
+        </Tag>
+        <span class="text-sm text-muted">{exp.location}</span>
+    </div>
+    <div class="flex min-w-0 flex-1 basis-96 flex-col gap-3">
+        <h2 class="text-2xl font-bold leading-tight text-text">{exp.title}</h2>
+        <span class="font-bold text-primary">{exp.company}</span>
+        <p class="leading-relaxed text-muted">{exp.description}</p>
+        <div class="flex flex-wrap gap-1.5">
+            {exp.tech.map((id) => <TechTag {id} />)}
+        </div>
+    </div>
+</li>

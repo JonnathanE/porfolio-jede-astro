@@ -1,0 +1,22 @@
+---
+import type { Post } from "@/constants/posts";
+import Tag from "@/components/ui/Tag.astro";
+
+interface Props {
+    post: Post;
+}
+
+const { post } = Astro.props;
+---
+
+<a
+    href={`/blog/${post.slug}`}
+    class="flex flex-col gap-3 rounded-2xl border border-line bg-surface p-6 transition-colors hover:bg-surface-alt"
+>
+    <Tag variant="soft" class="self-start">{post.category}</Tag>
+    <h3 class="text-xl font-bold leading-snug text-text">{post.title}</h3>
+    <p class="text-[15px] leading-relaxed text-muted">{post.excerpt}</p>
+    <span class="font-mono text-xs text-muted">
+        {post.date} · {post.readingTime} min de lectura
+    </span>
+</a>

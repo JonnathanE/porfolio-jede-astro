@@ -1,0 +1,39 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+    icon?: string;
+    eyebrow: string;
+    title: string;
+    href?: string;
+    linkLabel?: string;
+}
+
+const { icon, eyebrow, title, href, linkLabel } = Astro.props;
+---
+
+<div class="flex flex-wrap items-end justify-between gap-4">
+    <div>
+        <span
+            class="font-mono text-xs tracking-widest text-primary font-medium uppercase"
+        >
+            {eyebrow}
+        </span>
+        <h2
+            class="mt-2 flex items-center gap-3 text-3xl md:text-4xl font-extrabold tracking-tight text-text"
+        >
+            {icon && <Icon name={icon} size={32} class="shrink-0 text-primary" />}
+            {title}
+        </h2>
+    </div>
+    {
+        href && linkLabel && (
+            <a
+                href={href}
+                class="inline-flex min-h-11 items-center font-bold text-primary hover:underline"
+            >
+                {linkLabel} →
+            </a>
+        )
+    }
+</div>

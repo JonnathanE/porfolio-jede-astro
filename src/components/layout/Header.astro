@@ -1,0 +1,45 @@
+---
+import { Icon } from "astro-icon/components";
+
+import { navItems } from "@/constants/navItems";
+import SimpleThemeToggle from "@/components/widgets/SimpleThemeToggle.astro";
+
+const pathname = Astro.url.pathname.replace(/\/$/, "") || "/";
+
+const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
+---
+
+<header class="sticky top-0 z-50 border-b border-line bg-surface">
+    <div
+        class="mx-auto flex max-w-280 flex-wrap items-center justify-between gap-3 px-6 py-3.5"
+    >
+        <a
+            href="/"
+            aria-label="Inicio"
+            class="flex h-11 w-11 items-center justify-center rounded-xl bg-primary text-base font-extrabold text-on-primary"
+        >
+            JE
+        </a>
+        <nav aria-label="Principal" class="order-last flex w-full flex-wrap gap-1 md:order-none md:w-auto">
+            {
+                navItems.map((item) => (
+                    <a
+                        href={item.href}
+                        aria-current={isActive(item.href) ? "page" : undefined}
+                        class:list={[
+                            "flex min-h-11 items-center gap-2 rounded-xl px-4 text-[15px] font-semibold",
+                            isActive(item.href)
+                                ? "bg-primary text-on-primary"
+                                : "text-text hover:bg-surface-alt",
+                        ]}
+                    >
+                        <Icon name={item.icon} size={18} />
+                        {item.label}
+                    </a>
+                ))
+            }
+        </nav>
+        <SimpleThemeToggle />
+    </div>
+</header>

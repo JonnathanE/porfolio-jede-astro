@@ -1,0 +1,87 @@
+---
+import type { GetStaticPaths } from "astro";
+
+import PageLayout from "@layouts/PageLayout.astro";
+import Button from "@/components/ui/Button.astro";
+import Tag from "@/components/ui/Tag.astro";
+import { POSTS, type Post } from "@/constants/posts";
+
+export const getStaticPaths = (() =>
+    POSTS.map((post) => ({
+        params: { slug: post.slug },
+        props: { post },
+    }))) satisfies GetStaticPaths;
+
+interface Props {
+    post: Post;
+}
+
+const { post } = Astro.props;
+---
+
+<PageLayout title={`${post.title} | Blog`} description={post.excerpt}>
+    <div class="mx-auto flex max-w-190 flex-col gap-8 px-6 pt-12 pb-20">
+        <a
+            href="/blog"
+            class="flex min-h-11 items-center self-start text-[15px] text-muted hover:underline"
+        >
+            ← Volver al blog
+        </a>
+
+        <header class="flex flex-col gap-3.5">
+            <Tag variant="accent" class="self-start">{post.category}</Tag>
+            <h1 class="text-4xl font-extrabold leading-tight tracking-tight md:text-5xl">
+                {post.title}
+            </h1>
+            <span class="font-mono text-[13px] text-muted">
+                {post.date} · {post.readingTime} min de lectura
+            </span>
+        </header>
+
+        <div class="flex flex-wrap gap-2">
+            {post.tags.map((tag) => <Tag variant="soft">#{tag}</Tag>)}
+        </div>
+
+        <article class="flex flex-col gap-5 text-lg leading-loose text-muted">
+            <p>{post.intro}</p>
+            {
+                post.sections.map((section) => (
+                    <>
+                        <h2 class="mt-4 text-2xl font-bold leading-snug text-text md:text-3xl">
+                            {section.heading}
+                        </h2>
+                        {section.paragraphs.map((paragraph) => (
+                            <p>{paragraph}</p>
+                        ))}
+                        {section.list && (
+                            <ul class="flex list-disc flex-col gap-2 pl-6">
+                                {section.list.map((item) => (
+                                    <li>{item}</li>
+                                ))}
+                            </ul>
+                        )}
+                        {section.code && (
+                            <pre class="overflow-x-auto rounded-2xl border border-line bg-surface-alt p-5 font-mono text-sm leading-relaxed text-text">
+                                <code>{section.code}</code>
+                            </pre>
+                        )}
+                    </>
+                ))
+            }
+        </article>
+
+        <div
+            class="flex flex-col items-center gap-3 rounded-2xl border border-line bg-surface-alt px-6 py-9 text-center"
+        >
+            <h2 class="text-2xl font-bold">¿Te gustó este artículo?</h2>
+            <p class="text-muted">
+                Explora más publicaciones o escríbeme si quieres conversar
+                sobre el tema.
+            </p>
+            <div class="flex flex-wrap justify-center gap-3">
+                <Button href="/blog">Ver más artículos</Button>
+                <Button href="/contact" variant="outline">Contáctame</Button>
+            </div>
+        </div>
+    </div>
+</PageLayout>
