@@ -1,10 +1,10 @@
 import type { ImageMetadata } from "astro";
 
-import devtalles from "@assets/images/devtalles-logo.jpg";
-import cisco from "@assets/images/cisco-networking-academy-logo.jpg";
-import codigofacilito from "@assets/images/cdigofacilito-logo.jpg";
-import edteamlat from "@assets/images/edteamlat-logo.jpg";
-import udemy from "@assets/images/udemy-logo.jpg";
+import devtalles from "@assets/images/devtalles-logo.webp";
+import cisco from "@assets/images/cisco-networking-academy-logo.webp";
+import codigofacilito from "@assets/images/cdigofacilito-logo.webp";
+import edteamlat from "@assets/images/edteamlat-logo.webp";
+import udemy from "@assets/images/udemy-logo.webp";
 
 export interface Course {
   title: string;

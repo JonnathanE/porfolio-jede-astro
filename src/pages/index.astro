@@ -16,7 +16,7 @@ import { socialLinks } from "@/constants/socialLinks";
 import { TECH_CATEGORIES, getTechnology } from "@/constants/technologies";
 import { getPosts } from "@utils/blog";
 
-import HeroCharacter from "@assets/images/hero-character.jpg";
+import HeroCharacter from "@assets/images/hero-character.webp";
 
 const latestExperience = EXPERIENCE.slice(0, 3);
 const featuredProjects = PROJECTS.slice(0, 3);
@@ -82,7 +82,7 @@ const latestPosts = (await getPosts()).slice(0, 3);
                 alt="Foto de Jonnathan Espinoza"
                 formats={["webp", "jpg"]}
                 width={800}
-                class="aspect-square w-full max-w-md rounded-3xl border border-line object-cover"
+                class="aspect-square w-full max-w-md rounded-3xl border border-line object-cover object-[50%_25%]"
             />
         </div>
     </section>
