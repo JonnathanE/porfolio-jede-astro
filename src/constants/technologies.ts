@@ -16,6 +16,7 @@ export const TECHNOLOGIES = {
 	docker: { name: "Docker", icon: "docker" },
 	elementor: { name: "Elementor", icon: "elementor" },
 	express: { name: "Express.js", icon: "express" },
+	fastapi: { name: "FastAPI", icon: "fastapi" },
 	figma: { name: "Figma", icon: "figma" },
 	git: { name: "Git", icon: "git" },
 	github: { name: "GitHub", icon: "github" },

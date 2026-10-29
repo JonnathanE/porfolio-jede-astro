@@ -1,0 +1,194 @@
+---
+import type { ImageMetadata } from "astro";
+import { Picture } from "astro:assets";
+
+interface Props {
+    images: ImageMetadata[];
+    title: string;
+}
+
+const { images, title } = Astro.props;
+const hasMany = images.length > 1;
+const navButtonClass =
+    "absolute top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-line bg-surface/90 text-xl text-text shadow-sm backdrop-blur transition-colors hover:bg-surface-alt hover:text-primary disabled:cursor-default disabled:opacity-40";
+---
+
+{
+    hasMany ? (
+        <section
+            class="project-gallery flex flex-col gap-3"
+            aria-roledescription="carrusel"
+            aria-label={`Capturas de ${title}`}
+        >
+            <div class="relative">
+                <ul
+                    data-track
+                    class="flex snap-x snap-mandatory overflow-x-auto scroll-smooth rounded-2xl border border-line bg-surface-alt [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+                    tabindex="0"
+                    aria-label="Usa las flechas para cambiar de imagen"
+                >
+                    {images.map((image, index) => (
+                        <li
+                            class="aspect-16/10 w-full shrink-0 snap-center"
+                            aria-roledescription="diapositiva"
+                            aria-label={`${index + 1} de ${images.length}`}
+                        >
+                            <Picture
+                                src={image}
+                                alt={`Captura ${index + 1} de ${title}`}
+                                formats={["webp", "jpg"]}
+                                width={1200}
+                                loading={index === 0 ? "eager" : "lazy"}
+                                class="h-full w-full object-contain"
+                            />
+                        </li>
+                    ))}
+                </ul>
+                <button
+                    type="button"
+                    data-prev
+                    aria-label="Imagen anterior"
+                    class:list={[navButtonClass, "left-3"]}
+                >
+                    ‹
+                </button>
+                <button
+                    type="button"
+                    data-next
+                    aria-label="Imagen siguiente"
+                    class:list={[navButtonClass, "right-3"]}
+                >
+                    ›
+                </button>
+            </div>
+            <div class="flex items-center justify-center gap-1">
+                <button
+                    type="button"
+                    data-toggle
+                    aria-label="Pausar presentación"
+                    class="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full text-muted transition-colors hover:bg-surface-alt hover:text-primary"
+                >
+                    <span data-icon-pause aria-hidden="true">❚❚</span>
+                    <span data-icon-play aria-hidden="true" class="hidden">▶</span>
+                </button>
+                {images.map((_, index) => (
+                    <button
+                        type="button"
+                        data-dot
+                        aria-label={`Ir a la imagen ${index + 1}`}
+                        aria-current={index === 0 ? "true" : undefined}
+                        class="group flex h-11 w-8 cursor-pointer items-center justify-center"
+                    >
+                        <span class="h-2.5 w-2.5 rounded-full bg-line transition-colors group-hover:bg-muted group-aria-[current=true]:bg-primary" />
+                    </button>
+                ))}
+            </div>
+        </section>
+    ) : (
+        <Picture
+            src={images[0]}
+            alt={`Captura de ${title}`}
+            formats={["webp", "jpg"]}
+            width={1200}
+            class="w-full rounded-2xl border border-line object-cover"
+        />
+    )
+}
+
+<script>
+    const AUTOPLAY_DELAY_MS = 5000;
+    const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+    ).matches;
+    const galleries = document.querySelectorAll<HTMLElement>(".project-gallery");
+
+    galleries.forEach((gallery) => {
+        const track = gallery.querySelector<HTMLElement>("[data-track]");
+        const prev = gallery.querySelector<HTMLButtonElement>("[data-prev]");
+        const next = gallery.querySelector<HTMLButtonElement>("[data-next]");
+        const dots = gallery.querySelectorAll<HTMLButtonElement>("[data-dot]");
+        if (!track || !prev || !next) return;
+
+        const slideCount = track.children.length;
+        const currentIndex = () =>
+            Math.round(track.scrollLeft / track.clientWidth);
+        const goTo = (index: number) => {
+            const target = Math.max(0, Math.min(index, slideCount - 1));
+            track.scrollTo({ left: target * track.clientWidth });
+        };
+
+        const update = () => {
+            const index = currentIndex();
+            prev.disabled = index === 0;
+            next.disabled = index === slideCount - 1;
+            dots.forEach((dot, dotIndex) => {
+                if (dotIndex === index) {
+                    dot.setAttribute("aria-current", "true");
+                } else {
+                    dot.removeAttribute("aria-current");
+                }
+            });
+        };
+
+        prev.addEventListener("click", () => goTo(currentIndex() - 1));
+        next.addEventListener("click", () => goTo(currentIndex() + 1));
+        dots.forEach((dot, index) =>
+            dot.addEventListener("click", () => goTo(index)),
+        );
+
+        const toggle = gallery.querySelector<HTMLButtonElement>("[data-toggle]");
+        const pauseIcon = gallery.querySelector("[data-icon-pause]");
+        const playIcon = gallery.querySelector("[data-icon-play]");
+        let timer: number | undefined;
+        let isPlaying = !prefersReducedMotion;
+        let isInteracting = false;
+
+        const advance = () => {
+            const index = currentIndex();
+            goTo(index === slideCount - 1 ? 0 : index + 1);
+        };
+        const syncAutoplay = () => {
+            window.clearInterval(timer);
+            timer = undefined;
+            if (isPlaying && !isInteracting && !document.hidden) {
+                timer = window.setInterval(advance, AUTOPLAY_DELAY_MS);
+            }
+            toggle?.setAttribute(
+                "aria-label",
+                isPlaying ? "Pausar presentación" : "Reproducir presentación",
+            );
+            pauseIcon?.classList.toggle("hidden", !isPlaying);
+            playIcon?.classList.toggle("hidden", isPlaying);
+        };
+        const setInteracting = (value: boolean) => {
+            isInteracting = value;
+            syncAutoplay();
+        };
+
+        toggle?.addEventListener("click", () => {
+            isPlaying = !isPlaying;
+            syncAutoplay();
+        });
+        gallery.addEventListener("pointerenter", () => setInteracting(true));
+        gallery.addEventListener("pointerleave", () => setInteracting(false));
+        gallery.addEventListener("focusin", () => setInteracting(true));
+        gallery.addEventListener("focusout", (event) => {
+            if (!gallery.contains(event.relatedTarget as Node | null)) {
+                setInteracting(false);
+            }
+        });
+        document.addEventListener("visibilitychange", syncAutoplay);
+        syncAutoplay();
+        track.addEventListener("keydown", (event) => {
+            if (event.key === "ArrowLeft") {
+                event.preventDefault();
+                goTo(currentIndex() - 1);
+            } else if (event.key === "ArrowRight") {
+                event.preventDefault();
+                goTo(currentIndex() + 1);
+            }
+        });
+        track.addEventListener("scroll", update, { passive: true });
+        update();
+    });
+</script>
