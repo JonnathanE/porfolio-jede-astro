@@ -1,22 +1,24 @@
 ---
-import type { Post } from "@/constants/posts";
 import Tag from "@/components/ui/Tag.astro";
+import { formatPostDate, getReadingTime, type Post } from "@utils/blog";
 
 interface Props {
     post: Post;
 }
 
 const { post } = Astro.props;
+const { title, excerpt, category, date } = post.data;
 ---
 
 <a
-    href={`/blog/${post.slug}`}
+    href={`/blog/${post.id}`}
     class="flex flex-col gap-3 rounded-2xl border border-line bg-surface p-6 transition-colors hover:bg-surface-alt"
 >
-    <Tag variant="soft" class="self-start">{post.category}</Tag>
-    <h3 class="text-xl font-bold leading-snug text-text">{post.title}</h3>
-    <p class="text-[15px] leading-relaxed text-muted">{post.excerpt}</p>
+    <Tag variant="soft" class="self-start">{category}</Tag>
+    <h3 class="text-xl font-bold leading-snug text-text">{title}</h3>
+    <p class="text-[15px] leading-relaxed text-muted">{excerpt}</p>
     <span class="font-mono text-xs text-muted">
-        {post.date} · {post.readingTime} min de lectura
+        <time datetime={date.toISOString()}>{formatPostDate(date)}</time>{" "}
+        · {getReadingTime(post)} min de lectura
     </span>
 </a>

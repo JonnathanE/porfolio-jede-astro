@@ -3,10 +3,11 @@ import PageLayout from "@layouts/PageLayout.astro";
 import PageHeader from "@/components/ui/PageHeader.astro";
 import Tag from "@/components/ui/Tag.astro";
 import PostCard from "@/components/cards/PostCard.astro";
-import { POSTS } from "@/constants/posts";
+import { formatPostDate, getPosts, getReadingTime } from "@utils/blog";
 
-const featured = POSTS.find((post) => post.featured) ?? POSTS[0];
-const rest = POSTS.filter((post) => post !== featured);
+const posts = await getPosts();
+const featured = posts.find((post) => post.data.featured) ?? posts[0];
+const rest = posts.filter((post) => post !== featured);
 ---
 
 <PageLayout
@@ -23,20 +24,23 @@ const rest = POSTS.filter((post) => post !== featured);
         {
             featured && (
                 <a
-                    href={`/blog/${featured.slug}`}
+                    href={`/blog/${featured.id}`}
                     class="flex flex-col gap-4 rounded-3xl border border-line bg-surface-alt p-8 md:p-10"
                 >
                     <Tag variant="accent" class="self-start">
-                        Destacado · {featured.category}
+                        Destacado · {featured.data.category}
                     </Tag>
                     <h2 class="text-3xl font-extrabold leading-tight tracking-tight">
-                        {featured.title}
+                        {featured.data.title}
                     </h2>
                     <p class="max-w-2xl text-lg leading-relaxed text-muted">
-                        {featured.excerpt}
+                        {featured.data.excerpt}
                     </p>
                     <span class="font-mono text-xs text-muted">
-                        {featured.date} · {featured.readingTime} min de lectura
+                        <time datetime={featured.data.date.toISOString()}>
+                            {formatPostDate(featured.data.date)}
+                        </time>{" "}
+                        · {getReadingTime(featured)} min de lectura
                     </span>
                 </a>
             )

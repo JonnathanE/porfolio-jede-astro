@@ -9,4 +9,9 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   integrations: [icon()],
+  markdown: {
+    shikiConfig: {
+      themes: { light: "github-light", dark: "github-dark" },
+    },
+  },
 });

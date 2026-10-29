@@ -1,14 +1,15 @@
 ---
 import type { GetStaticPaths } from "astro";
+import { render } from "astro:content";
 
 import PageLayout from "@layouts/PageLayout.astro";
 import Button from "@/components/ui/Button.astro";
 import Tag from "@/components/ui/Tag.astro";
-import { POSTS, type Post } from "@/constants/posts";
+import { formatPostDate, getPosts, getReadingTime, type Post } from "@utils/blog";
 
-export const getStaticPaths = (() =>
-    POSTS.map((post) => ({
-        params: { slug: post.slug },
+export const getStaticPaths = (async () =>
+    (await getPosts()).map((post) => ({
+        params: { slug: post.id },
         props: { post },
     }))) satisfies GetStaticPaths;
 
@@ -17,9 +18,11 @@ interface Props {
 }
 
 const { post } = Astro.props;
+const { title, excerpt, date, category, tags } = post.data;
+const { Content } = await render(post);
 ---
 
-<PageLayout title={`${post.title} | Blog`} description={post.excerpt}>
+<PageLayout title={`${title} | Blog`} description={excerpt}>
     <div class="mx-auto flex max-w-190 flex-col gap-8 px-6 pt-12 pb-20">
         <a
             href="/blog"
@@ -29,45 +32,22 @@ const { post } = Astro.props;
         </a>
 
         <header class="flex flex-col gap-3.5">
-            <Tag variant="accent" class="self-start">{post.category}</Tag>
+            <Tag variant="accent" class="self-start">{category}</Tag>
             <h1 class="text-4xl font-extrabold leading-tight tracking-tight md:text-5xl">
-                {post.title}
+                {title}
             </h1>
             <span class="font-mono text-[13px] text-muted">
-                {post.date} · {post.readingTime} min de lectura
+                <time datetime={date.toISOString()}>{formatPostDate(date)}</time>{" "}
+                · {getReadingTime(post)} min de lectura
             </span>
         </header>
 
         <div class="flex flex-wrap gap-2">
-            {post.tags.map((tag) => <Tag variant="soft">#{tag}</Tag>)}
+            {tags.map((tag) => <Tag variant="soft">#{tag}</Tag>)}
         </div>
 
-        <article class="flex flex-col gap-5 text-lg leading-loose text-muted">
-            <p>{post.intro}</p>
-            {
-                post.sections.map((section) => (
-                    <>
-                        <h2 class="mt-4 text-2xl font-bold leading-snug text-text md:text-3xl">
-                            {section.heading}
-                        </h2>
-                        {section.paragraphs.map((paragraph) => (
-                            <p>{paragraph}</p>
-                        ))}
-                        {section.list && (
-                            <ul class="flex list-disc flex-col gap-2 pl-6">
-                                {section.list.map((item) => (
-                                    <li>{item}</li>
-                                ))}
-                            </ul>
-                        )}
-                        {section.code && (
-                            <pre class="overflow-x-auto rounded-2xl border border-line bg-surface-alt p-5 font-mono text-sm leading-relaxed text-text">
-                                <code>{section.code}</code>
-                            </pre>
-                        )}
-                    </>
-                ))
-            }
+        <article class="post-content flex flex-col gap-5 text-lg leading-loose text-muted">
+            <Content />
         </article>
 
         <div
@@ -85,3 +65,93 @@ const { post } = Astro.props;
         </div>
     </div>
 </PageLayout>
+
+<style>
+    /* El HTML generado desde Markdown no admite clases, así que se estiliza aquí. */
+    .post-content :global(:is(h2, h3)) {
+        margin-top: 1rem;
+        font-weight: 700;
+        line-height: 1.375;
+        color: var(--color-text);
+    }
+
+    .post-content :global(h2) {
+        font-size: var(--text-2xl);
+    }
+
+    .post-content :global(h3) {
+        font-size: var(--text-xl);
+    }
+
+    @media (width >= 48rem) {
+        .post-content :global(h2) {
+            font-size: var(--text-3xl);
+        }
+    }
+
+    .post-content :global(a) {
+        color: var(--color-primary);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+    }
+
+    .post-content :global(strong) {
+        font-weight: 700;
+        color: var(--color-text);
+    }
+
+    .post-content :global(:is(ul, ol)) {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        padding-left: 1.5rem;
+    }
+
+    .post-content :global(ul) {
+        list-style: disc;
+    }
+
+    .post-content :global(ol) {
+        list-style: decimal;
+    }
+
+    .post-content :global(blockquote) {
+        border-left: 4px solid var(--color-line);
+        padding-left: 1.25rem;
+        font-style: italic;
+    }
+
+    .post-content :global(:not(pre) > code) {
+        border-radius: 0.375rem;
+        background-color: var(--color-surface-alt);
+        padding: 0.125rem 0.375rem;
+        font-family: var(--font-mono);
+        font-size: 0.875em;
+        color: var(--color-text);
+    }
+
+    .post-content :global(pre) {
+        overflow-x: auto;
+        border: 1px solid var(--color-line);
+        border-radius: var(--radius-card);
+        background-color: var(--color-surface-alt) !important;
+        padding: 1.25rem;
+        font-family: var(--font-mono);
+        font-size: var(--text-sm);
+        line-height: 1.625;
+    }
+
+    /* Shiki usa el tema claro por defecto; en modo oscuro se cambia al suyo. */
+    :global(.dark) .post-content :global(pre span) {
+        color: var(--shiki-dark) !important;
+    }
+
+    .post-content :global(img) {
+        border: 1px solid var(--color-line);
+        border-radius: var(--radius-card);
+    }
+
+    .post-content :global(hr) {
+        border-color: var(--color-line);
+    }
+</style>

@@ -11,16 +11,16 @@ import PostCard from "@/components/cards/PostCard.astro";
 import CtaBand from "@/components/sections/CtaBand.astro";
 import { EXPERIENCE } from "@/constants/experience";
 import { PROJECTS } from "@/constants/projects";
-import { POSTS } from "@/constants/posts";
 import { SITE } from "@/constants/site";
 import { socialLinks } from "@/constants/socialLinks";
 import { TECH_CATEGORIES, getTechnology } from "@/constants/technologies";
+import { getPosts } from "@utils/blog";
 
 import HeroCharacter from "@assets/images/hero-character.jpg";
 
 const latestExperience = EXPERIENCE.slice(0, 3);
 const featuredProjects = PROJECTS.slice(0, 3);
-const latestPosts = POSTS.slice(0, 3);
+const latestPosts = (await getPosts()).slice(0, 3);
 ---
 
 <PageLayout
