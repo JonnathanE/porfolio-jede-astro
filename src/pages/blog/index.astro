@@ -46,8 +46,17 @@ const rest = posts.filter((post) => post !== featured);
             )
         }
 
-        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {rest.map((post) => <PostCard {post} />)}
-        </div>
+        {
+            featured ? (
+                <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    {rest.map((post) => <PostCard {post} />)}
+                </div>
+            ) : (
+                <p class="rounded-3xl border border-line bg-surface-alt p-8 text-lg text-muted md:p-10">
+                    Todavía no hay artículos publicados. Pronto compartiré el
+                    primero.
+                </p>
+            )
+        }
     </div>
 </PageLayout>

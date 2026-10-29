@@ -161,17 +161,22 @@ const latestPosts = (await getPosts()).slice(0, 3);
         </div>
     </section>
 
-    <section class="mx-auto flex max-w-280 flex-col gap-10 px-6 py-20">
-        <SectionHeading
-            eyebrow="Escribo sobre lo que aprendo"
-            icon="blog" title="Últimos posts"
-            href="/blog"
-            linkLabel="Ver el blog"
-        />
-        <div class="grid gap-5 md:grid-cols-3">
-            {latestPosts.map((post) => <PostCard {post} />)}
-        </div>
-    </section>
+    {
+        latestPosts.length > 0 && (
+            <section class="mx-auto flex max-w-280 flex-col gap-10 px-6 py-20">
+                <SectionHeading
+                    eyebrow="Escribo sobre lo que aprendo"
+                    icon="blog"
+                    title="Últimos posts"
+                    href="/blog"
+                    linkLabel="Ver el blog"
+                />
+                <div class="grid gap-5 md:grid-cols-3">
+                    {latestPosts.map((post) => <PostCard {post} />)}
+                </div>
+            </section>
+        )
+    }
 
     <CtaBand />
 </PageLayout>
