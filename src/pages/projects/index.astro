@@ -1,0 +1,26 @@
+---
+import PageLayout from "@layouts/PageLayout.astro";
+import PageHeader from "@/components/ui/PageHeader.astro";
+import ProjectCard from "@/components/cards/ProjectCard.astro";
+import { PROJECTS } from "@/constants/projects";
+---
+
+<PageLayout
+    title="Proyectos | Jonnathan Espinoza"
+    description="Selección de proyectos de desarrollo web, integraciones y soluciones a medida."
+>
+    <div class="mx-auto flex max-w-280 flex-col gap-10 px-6 pt-16 pb-20">
+        <PageHeader
+            eyebrow="Portafolio"
+            title="Proyectos"
+            description={`Una selección de proyectos en los que he trabajado. ${PROJECTS.length} en total.`}
+        />
+        <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {
+                PROJECTS.map((project) => (
+                    <ProjectCard {project} headingLevel={2} />
+                ))
+            }
+        </div>
+    </div>
+</PageLayout>

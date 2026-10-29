@@ -1,0 +1,62 @@
+---
+import PageLayout from "@layouts/PageLayout.astro";
+import PageHeader from "@/components/ui/PageHeader.astro";
+import Tag from "@/components/ui/Tag.astro";
+import PostCard from "@/components/cards/PostCard.astro";
+import { formatPostDate, getPosts, getReadingTime } from "@utils/blog";
+
+const posts = await getPosts();
+const featured = posts.find((post) => post.data.featured) ?? posts[0];
+const rest = posts.filter((post) => post !== featured);
+---
+
+<PageLayout
+    title="Blog | Jonnathan Espinoza"
+    description="Notas, guías y reflexiones sobre desarrollo de software."
+>
+    <div class="mx-auto flex max-w-280 flex-col gap-10 px-6 pt-16 pb-20">
+        <PageHeader
+            eyebrow="Escribo sobre lo que aprendo"
+            title="Blog"
+            description="Notas, guías y reflexiones sobre desarrollo de software."
+        />
+
+        {
+            featured && (
+                <a
+                    href={`/blog/${featured.id}`}
+                    class="flex flex-col gap-4 rounded-3xl border border-line bg-surface-alt p-8 md:p-10"
+                >
+                    <Tag variant="accent" class="self-start">
+                        Destacado · {featured.data.category}
+                    </Tag>
+                    <h2 class="text-3xl font-extrabold leading-tight tracking-tight">
+                        {featured.data.title}
+                    </h2>
+                    <p class="max-w-2xl text-lg leading-relaxed text-muted">
+                        {featured.data.excerpt}
+                    </p>
+                    <span class="font-mono text-xs text-muted">
+                        <time datetime={featured.data.date.toISOString()}>
+                            {formatPostDate(featured.data.date)}
+                        </time>{" "}
+                        · {getReadingTime(featured)} min de lectura
+                    </span>
+                </a>
+            )
+        }
+
+        {
+            featured ? (
+                <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    {rest.map((post) => <PostCard {post} />)}
+                </div>
+            ) : (
+                <p class="rounded-3xl border border-line bg-surface-alt p-8 text-lg text-muted md:p-10">
+                    Todavía no hay artículos publicados. Pronto compartiré el
+                    primero.
+                </p>
+            )
+        }
+    </div>
+</PageLayout>

@@ -1,0 +1,33 @@
+---
+import PageLayout from "@layouts/PageLayout.astro";
+import PageHeader from "@/components/ui/PageHeader.astro";
+import Button from "@/components/ui/Button.astro";
+import ExperienceCard from "@/components/cards/ExperienceCard.astro";
+import { EXPERIENCE } from "@/constants/experience";
+---
+
+<PageLayout
+    title="Experiencia | Jonnathan Espinoza"
+    description="Experiencia profesional de Jonnathan Espinoza como desarrollador Full Stack."
+>
+    <div class="mx-auto flex max-w-280 flex-col gap-12 px-6 pt-16 pb-20">
+        <PageHeader
+            eyebrow="Trayectoria"
+            title="Experiencia"
+            description="Dónde he trabajado y qué he construido."
+        />
+        <ol class="flex flex-col gap-6">
+            {
+                EXPERIENCE.map((experience) => (
+                    <ExperienceCard {experience} />
+                ))
+            }
+        </ol>
+        <div
+            class="flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-line bg-surface-alt p-7"
+        >
+            <strong class="text-xl">¿Te interesa trabajar conmigo?</strong>
+            <Button href="/contact">Contáctame</Button>
+        </div>
+    </div>
+</PageLayout>

@@ -1,0 +1,17 @@
+---
+import { Icon } from "astro-icon/components";
+
+import { getTechnology, type TechId } from "@/constants/technologies";
+import Tag from "@/components/ui/Tag.astro";
+
+interface Props {
+    id: TechId;
+}
+
+const { name, icon } = getTechnology(Astro.props.id);
+---
+
+<Tag class="inline-flex items-center gap-1.5">
+    <Icon name={icon} size={16} />
+    {name}
+</Tag>

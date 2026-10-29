@@ -1,0 +1,170 @@
+---
+import PageLayout from "@layouts/PageLayout.astro";
+import PageHeader from "@/components/ui/PageHeader.astro";
+import Button from "@/components/ui/Button.astro";
+import { SITE } from "@/constants/site";
+import { socialLinks } from "@/constants/socialLinks";
+
+const fieldClass =
+    "w-full rounded-xl border border-line bg-surface-alt px-4 text-text placeholder:text-muted/70 focus-visible:outline-2 focus-visible:outline-primary";
+---
+
+<PageLayout
+    title="Contacto | Jonnathan Espinoza"
+    description="Ponte en contacto con Jonnathan Espinoza para tu próximo proyecto."
+>
+    <div class="mx-auto flex max-w-280 flex-col gap-12 px-6 pt-16 pb-20">
+        <PageHeader
+            eyebrow="Hablemos"
+            title="Contacto"
+            description="Cuéntame tu idea y buscamos la mejor forma de llevarla a producción."
+        />
+
+        <div class="flex flex-wrap items-start gap-8">
+            <form
+                id="contactForm"
+                method="post"
+                class="flex min-w-0 flex-1 basis-130 flex-col gap-5 rounded-2xl border border-line p-8"
+            >
+                <div class="flex flex-col gap-2">
+                    <label for="nombre" class="font-semibold">Nombre</label>
+                    <input
+                        id="nombre"
+                        name="nombre"
+                        type="text"
+                        autocomplete="name"
+                        placeholder="Tu nombre"
+                        required
+                        minlength="2"
+                        maxlength="100"
+                        class={`${fieldClass} min-h-12`}
+                    />
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label for="correo" class="font-semibold">
+                        Correo electrónico
+                    </label>
+                    <input
+                        id="correo"
+                        name="correo"
+                        type="email"
+                        autocomplete="email"
+                        placeholder="tucorreo@ejemplo.com"
+                        required
+                        class={`${fieldClass} min-h-12`}
+                    />
+                </div>
+                <div class="flex flex-col gap-2">
+                    <label for="mensaje" class="font-semibold">Mensaje</label>
+                    <textarea
+                        id="mensaje"
+                        name="mensaje"
+                        rows="6"
+                        placeholder="¿En qué te puedo ayudar?"
+                        required
+                        minlength="10"
+                        maxlength="5000"
+                        class={`${fieldClass} py-3.5`}></textarea>
+                </div>
+                <div class="hidden" aria-hidden="true">
+                    <label for="empresa">Empresa</label>
+                    <input
+                        id="empresa"
+                        name="empresa"
+                        type="text"
+                        tabindex="-1"
+                        autocomplete="off"
+                    />
+                </div>
+                <Button type="submit" class="self-start disabled:opacity-60">
+                    Enviar mensaje
+                </Button>
+                <p
+                    id="contactStatus"
+                    role="status"
+                    aria-live="polite"
+                    class="min-h-6 text-sm font-semibold"
+                >
+                </p>
+            </form>
+
+            <aside class="flex min-w-0 flex-1 basis-72 flex-col gap-4">
+                <div
+                    class="flex flex-col gap-2.5 rounded-2xl border border-line bg-surface-alt p-6"
+                >
+                    <span class="font-mono text-xs tracking-widest text-muted">
+                        CORREO
+                    </span>
+                    <a
+                        href="#contactForm"
+                        data-email={SITE.emailEncoded}
+                        class="break-all text-lg font-bold hover:underline"
+                    >
+                        Escríbeme un correo
+                    </a>
+                </div>
+                <div
+                    class="flex flex-col gap-1 rounded-2xl border border-line bg-surface-alt p-6"
+                >
+                    <span
+                        class="mb-1.5 font-mono text-xs tracking-widest text-muted"
+                    >
+                        REDES
+                    </span>
+                    {
+                        socialLinks.map(({ label, href }) => (
+                            <a
+                                href={href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="flex min-h-11 items-center font-semibold hover:underline"
+                            >
+                                {label} ↗
+                            </a>
+                        ))
+                    }
+                </div>
+                <div
+                    class="flex items-center gap-2.5 rounded-2xl border border-line p-6 text-muted"
+                >
+                    <span class="h-2.5 w-2.5 shrink-0 rounded-full bg-green-600"></span>
+                    Disponible para trabajos independientes · {SITE.location}
+                </div>
+            </aside>
+        </div>
+    </div>
+</PageLayout>
+
+<script>
+    import { actions, isInputError } from "astro:actions";
+    import "@/scripts/revealEmail";
+
+    const form = document.querySelector<HTMLFormElement>("#contactForm");
+    const status = document.querySelector<HTMLParagraphElement>("#contactStatus");
+
+    form?.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        if (!status) return;
+
+        const submit = form.querySelector<HTMLButtonElement>("[type=submit]");
+        if (submit) submit.disabled = true;
+        status.className = "min-h-6 text-sm font-semibold text-muted";
+        status.textContent = "Enviando…";
+
+        const { error } = await actions.sendContact(new FormData(form));
+
+        if (submit) submit.disabled = false;
+
+        if (!error) {
+            form.reset();
+            status.className = "min-h-6 text-sm font-semibold text-green-600";
+            status.textContent = "¡Gracias! Tu mensaje fue enviado.";
+            return;
+        }
+
+        status.className = "min-h-6 text-sm font-semibold text-red-600";
+        status.textContent = isInputError(error)
+            ? Object.values(error.fields).flat().join(" ")
+            : "No se pudo enviar el mensaje. Inténtalo de nuevo más tarde.";
+    });
+</script>

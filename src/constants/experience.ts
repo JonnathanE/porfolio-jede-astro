@@ -1,3 +1,5 @@
+import type { TechId } from "@/constants/technologies";
+
 // Tipado
 export type WorkType =
   | "Jornada Completa"
@@ -37,7 +39,7 @@ export interface Experience {
   workType: WorkType;
   locationType: LocationType;
   description: string;
-  tech: string[];
+  tech: TechId[];
 }
 
 // Data
@@ -54,15 +56,17 @@ export const EXPERIENCE: Experience[] = [
     workType: "Jornada Completa",
     locationType: "Remoto",
     description:
-      "Responsable del desarrollo y mantenimiento de la aplicación web CARTERA365, orientada a la gestión de créditos. Encargado de la creación de APIs REST y interfaces de usuario, integrando funcionalidades clave para la experiencia del cliente. Administración de bases de datos en SQL Server, incluyendo diseño, optimización y consultas avanzadas. Análisis de requerimientos y propuesta de soluciones técnicas eficientes alineadas con los objetivos del cliente. Supervisión de nuevas funcionalidades (features) y correcciones (fixes) implementadas en el proyecto. Gestión de despliegue, monitoreo y mantenimiento en servidores AWS. Además, participé en el diseño y construcción de un Data Warehouse (DW), implementando procesos ETL mediante SSIS y liderando migraciones de datos críticas para la operación del sistema.",
+      "Desarrollo y optimización de CARTERA365, una aplicación web para la gestión de créditos, implementando APIs REST e interfaces de usuario con Django REST Framework y React.js. Optimización y administración de bases de datos SQL Server, automatización de procesos ETL con SSIS e implementación de un Data Warehouse para la integración y análisis de datos. Transformación de requerimientos en soluciones técnicas, entrega de nuevas funcionalidades y resolución de incidencias. Gestión de despliegues y mantenimiento en AWS. Colaboración en proyectos de FastLine con Spring Boot y Angular.",
     tech: [
-      "Django",
-      "React.js",
-      "Bootstrap",
-      "SQL Server",
-      "SSIS (ETL)",
-      "AWS Lightsail",
-      "Docker",
+      "django",
+      "springboot",
+      "react",
+      "angular",
+      "bootstrap",
+      "sqlserver",
+      "ssis",
+      "awsLightsail",
+      "docker",
     ],
   },
   {
@@ -77,8 +81,8 @@ export const EXPERIENCE: Experience[] = [
     workType: "Freelance",
     locationType: "Remoto",
     description:
-      "Participación en el desarrollo de una Intranet corporativa utilizando WordPress como CMS principal. Uso de Elementor como constructor de páginas para crear plantillas y componentes reutilizables basados en diseños provenientes de Figma, garantizando coherencia visual y funcionalidad. Evaluación, prueba y configuración de distintos plugins para cumplir con los requerimientos específicos del proyecto. Desarrollo de funcionalidades personalizadas mediante Code Snippets en PHP, adaptando la plataforma a necesidades particulares del cliente.",
-    tech: ["WordPress", "Elementor", "PHP", "JavaScript", "HTML", "CSS"],
+      "Desarrollé y personalicé una intranet corporativa con WordPress, creando plantillas y componentes reutilizables con Elementor a partir de diseños en Figma. Implementé funcionalidades personalizadas con PHP y Code Snippets, y configuré plugins para adaptar la plataforma a los requerimientos del cliente, mejorando la reutilización de componentes y la coherencia visual de la interfaz.",
+    tech: ["wordpress", "elementor", "php", "javascript", "html", "css"],
   },
   {
     startMonth: "Septiembre",
@@ -92,7 +96,7 @@ export const EXPERIENCE: Experience[] = [
     workType: "Formación",
     locationType: "Remoto",
     description:
-      "Desarrollo de una aplicación web educativa para la enseñanza de la Lengua de Señas Ecuatoriana, orientada a todo tipo de usuarios, inspirada en plataformas como Duolingo. La aplicación incluyó lecciones interactivas, pruebas por nivel, progreso del usuario y diseño accesible. Participé en todas las etapas del desarrollo: análisis de requerimientos, diseño de interfaz, implementación del backend, base de datos NoSQL y despliegue. El proyecto fue presentado como trabajo de titulación para la carrera de Ingeniería en Sistemas.",
-    tech: ["Express.js", "MongoDB", "React.js", "Tailwind CSS"],
+      "Desarrollé una aplicación web educativa para la enseñanza de la Lengua de Señas Ecuatoriana, inspirada en Duolingo, con lecciones interactivas, evaluaciones por niveles y seguimiento del progreso del usuario. Implementé una solución integral utilizando React, Tailwind CSS, Express y MongoDB, abarcando el análisis de requerimientos, diseño de interfaz, desarrollo backend y despliegue. El proyecto fue presentado como trabajo de titulación para la carrera de Ingeniería en Sistemas, con enfoque en accesibilidad y aprendizaje interactivo.",
+    tech: ["express", "mongodb", "react", "tailwind"],
   },
 ];

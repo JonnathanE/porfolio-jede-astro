@@ -1,0 +1,70 @@
+---
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+
+import type { Course } from "@/constants/courses";
+import Tag from "@/components/ui/Tag.astro";
+
+interface Props {
+    course: Course;
+    class?: string;
+}
+
+const { course, class: className } = Astro.props;
+const initials = course.issuer
+    .split(" ")
+    .map((word) => word[0])
+    .slice(0, 2)
+    .join("")
+    .toUpperCase();
+---
+
+<li
+    class:list={[
+        "flex items-center gap-4 rounded-2xl border border-line bg-surface-alt p-4",
+        className,
+    ]}
+>
+    {
+        course.icon ? (
+            <Image
+                src={course.icon}
+                alt={`Logo de ${course.issuer}`}
+                width={56}
+                height={56}
+                class="h-14 w-14 shrink-0 rounded-xl border border-line bg-white object-contain p-1"
+            />
+        ) : (
+            <span
+                aria-hidden="true"
+                class="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-line bg-surface text-lg font-extrabold text-primary"
+            >
+                {initials}
+            </span>
+        )
+    }
+    <div class="flex min-w-0 flex-1 flex-col items-start gap-1">
+        <Tag variant="accent" class="px-2! py-0.5! text-xs!">Curso</Tag>
+        <h3 class="text-[15px] font-bold leading-snug text-text">
+            {course.title}
+        </h3>
+        <span class="text-sm text-muted">{course.issuer}</span>
+        <span class="flex items-center gap-1.5 font-mono text-xs text-muted">
+            <Icon name="calendar" size={14} />
+            {course.date}
+        </span>
+    </div>
+    {
+        course.url && (
+            <a
+                href={course.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`Ver certificado: ${course.title}`}
+                class="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-muted hover:bg-surface hover:text-text"
+            >
+                <Icon name="arrow-up-right" size={20} />
+            </a>
+        )
+    }
+</li>

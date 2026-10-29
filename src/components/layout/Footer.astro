@@ -1,0 +1,88 @@
+---
+import { Icon } from "astro-icon/components";
+
+import { navItems } from "@/constants/navItems";
+import { socialLinks } from "@/constants/socialLinks";
+import { SITE } from "@/constants/site";
+
+const year = new Date().getFullYear();
+---
+
+<footer class="border-t border-line bg-surface-alt">
+    <div class="mx-auto flex max-w-280 flex-col gap-10 px-6 pt-14 pb-8">
+        <div class="flex flex-wrap justify-between gap-10">
+            <div class="flex max-w-sm flex-1 basis-80 flex-col gap-4">
+                <div class="flex items-center gap-2.5">
+                    <span
+                        class="flex h-10 w-10 items-center justify-center rounded-xl bg-primary font-extrabold text-on-primary"
+                    >
+                        JE
+                    </span>
+                    <strong class="text-lg">{SITE.name}</strong>
+                </div>
+                <p class="leading-relaxed text-muted">
+                    Desarrollo backend y frontend: arquitecturas robustas y
+                    escalables con interfaces fluidas.
+                </p>
+            </div>
+            <div class="flex flex-wrap gap-14">
+                <div class="flex flex-col gap-1">
+                    <span
+                        class="mb-2 font-mono text-xs tracking-widest text-muted"
+                    >
+                        NAVEGACIÓN
+                    </span>
+                    {
+                        navItems.map((item) => (
+                            <a
+                                href={item.href}
+                                class="flex min-h-8 items-center hover:underline"
+                            >
+                                {item.label}
+                            </a>
+                        ))
+                    }
+                </div>
+                <div class="flex flex-col gap-1">
+                    <span
+                        class="mb-2 font-mono text-xs tracking-widest text-muted"
+                    >
+                        CONTACTO
+                    </span>
+                    <a
+                        href="/contact"
+                        data-email={SITE.emailEncoded}
+                        class="flex min-h-8 items-center hover:underline"
+                    >
+                        Escríbeme un correo
+                    </a>
+                    <div class="mt-2 flex gap-2">
+                        {
+                            socialLinks.map(({ label, href, icon }) => (
+                                <a
+                                    href={href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    aria-label={label}
+                                    class="flex h-11 w-11 items-center justify-center rounded-xl hover:bg-surface"
+                                >
+                                    <Icon name={icon} size={26} />
+                                </a>
+                            ))
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div
+            class="flex flex-wrap justify-between gap-2 border-t border-line pt-6 text-sm text-muted"
+        >
+            <span>{SITE.location}</span>
+            <span>© {year} {SITE.name}</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+    import "@/scripts/revealEmail";
+</script>

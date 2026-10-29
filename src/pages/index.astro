@@ -1,27 +1,186 @@
 ---
-import Layout from "@layouts/Layout.astro";
+import { Picture } from "astro:assets";
+import { Icon } from "astro-icon/components";
 
-import Navbar from "@/components/sections/Navbar.astro";
-import Hero from "@/components/sections/Hero.astro";
-import About from "@/components/sections/About.astro";
-import Skills from "@/components/sections/Skills.astro";
-import Experience from "@/components/sections/Experience.astro";
-import Portfolio from "@/components/sections/Portfolio.astro";
-import Footer from "@/components/sections/Footer.astro";
+import PageLayout from "@layouts/PageLayout.astro";
+import Button from "@/components/ui/Button.astro";
+import Tag from "@/components/ui/Tag.astro";
+import SectionHeading from "@/components/ui/SectionHeading.astro";
+import ProjectCard from "@/components/cards/ProjectCard.astro";
+import PostCard from "@/components/cards/PostCard.astro";
+import CtaBand from "@/components/sections/CtaBand.astro";
+import { EXPERIENCE } from "@/constants/experience";
+import { PROJECTS } from "@/constants/projects";
+import { SITE } from "@/constants/site";
+import { socialLinks } from "@/constants/socialLinks";
+import { TECH_CATEGORIES, getTechnology } from "@/constants/technologies";
+import { getPosts } from "@utils/blog";
+
+import HeroCharacter from "@assets/images/hero-character.webp";
+
+const latestExperience = EXPERIENCE.slice(0, 3);
+const featuredProjects = PROJECTS.slice(0, 3);
+const latestPosts = (await getPosts()).slice(0, 3);
 ---
 
-<Layout
+<PageLayout
     title="Portafolio de Jonnathan Espinoza - Desarrollador y Programador Web"
-    description="Contrata a Jonnathan Espinoza, un desarrollador web con más de 3 años de experiencia en la creación de aplicaciones únicas y personalizadas. Hábil en HTML, CSS, JavaScript y frameworks modernos. Jonnathan está listo para llevar su proyecto al siguiente nivel."
-    image="/images/perfil_hero.jpeg"
+    description="Contrata a Jonnathan Espinoza, un desarrollador web con más de 3 años de experiencia en la creación de aplicaciones únicas y personalizadas."
+    image="/images/perfil_hero.jpg"
 >
-    <main>
-        <Navbar />
-        <Hero />
-        <About />
-        <Skills />
-        <Experience />
-        <Portfolio />
-        <Footer />
-    </main>
-</Layout>
+    <section
+        class="mx-auto flex max-w-280 flex-wrap items-center gap-12 px-6 pt-16 pb-20"
+    >
+        <div class="flex min-w-0 flex-1 basis-120 flex-col gap-6">
+            <span
+                class="inline-flex items-center gap-2.5 self-start rounded-full border border-line px-4 py-2 text-sm text-muted"
+            >
+                <span class="h-2 w-2 rounded-full bg-green-600"></span>
+                Disponible para trabajos independientes
+            </span>
+            <h1
+                class="text-5xl font-extrabold leading-[1.08] tracking-tight md:text-6xl"
+            >
+                Hola, soy <span class="text-primary">{SITE.name}</span>
+            </h1>
+            <div class="flex flex-wrap gap-2">
+                {SITE.roles.map((role) => <Tag variant="soft">{role}</Tag>)}
+            </div>
+            <p class="max-w-xl text-lg leading-relaxed text-muted">
+                {SITE.tagline}
+            </p>
+            <div class="flex flex-wrap gap-3">
+                <Button href="/contact">
+                    <Icon name="email-plus" size={18} />
+                    Contáctame
+                </Button>
+                <Button href={SITE.cv} variant="outline" target="_blank">
+                    <Icon name="download-outline" size={18} />
+                    Descargar CV
+                </Button>
+            </div>
+            <div class="flex items-center gap-4">
+                <span class="text-muted">Sígueme:</span>
+                {
+                    socialLinks.map(({ icon, href, label }) => (
+                        <a
+                            href={href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={label}
+                            class="flex h-12 w-12 items-center justify-center rounded-xl hover:bg-surface-alt"
+                        >
+                            <Icon name={icon} size={28} />
+                        </a>
+                    ))
+                }
+            </div>
+        </div>
+        <div class="flex flex-1 basis-80 justify-center">
+            <Picture
+                src={HeroCharacter}
+                alt="Foto de Jonnathan Espinoza"
+                formats={["avif", "webp"]}
+                fallbackFormat="jpg"
+                width={896}
+                widths={[400, 672, 896]}
+                sizes="(min-width: 496px) 448px, calc(100vw - 48px)"
+                priority
+                class="aspect-square w-full max-w-md rounded-3xl border border-line object-cover object-[50%_25%]"
+            />
+        </div>
+    </section>
+
+    <section class="border-y border-line bg-surface-alt">
+        <div class="mx-auto flex max-w-280 flex-col gap-10 px-6 py-20">
+            <SectionHeading
+                eyebrow="Trayectoria"
+                icon="suitcase-line" title="Experiencia"
+                href="/experience"
+                linkLabel="Ver toda mi experiencia"
+            />
+            <div class="grid gap-5 md:grid-cols-3">
+                {
+                    latestExperience.map((exp) => (
+                        <article class="flex flex-col gap-3 rounded-2xl border border-line bg-surface p-6">
+                            <span class="font-mono text-xs text-muted">
+                                {exp.startMonth} {exp.startYear} –{" "}
+                                {exp.currentlyWorking
+                                    ? "Actualidad"
+                                    : `${exp.endMonth} ${exp.endYear}`}
+                            </span>
+                            <h3 class="text-xl font-bold leading-snug">
+                                {exp.title}
+                            </h3>
+                            <span class="font-semibold text-primary">
+                                {exp.company}
+                            </span>
+                            <p class="line-clamp-4 text-[15px] leading-relaxed text-muted">
+                                {exp.description}
+                            </p>
+                        </article>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+
+    <section class="mx-auto flex max-w-280 flex-col gap-10 px-6 py-20">
+        <SectionHeading
+            eyebrow="Trabajo seleccionado"
+            icon="folder-outline" title="Proyectos"
+            href="/projects"
+            linkLabel="Ver más proyectos"
+        />
+        <div class="grid gap-6 md:grid-cols-3">
+            {featuredProjects.map((project) => <ProjectCard {project} />)}
+        </div>
+    </section>
+
+    <section class="border-y border-line bg-surface-alt">
+        <div class="mx-auto flex max-w-280 flex-col gap-10 px-6 py-20">
+            <SectionHeading eyebrow="Herramientas" icon="git-branch" title="Tecnologías" />
+            <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+                {
+                    TECH_CATEGORIES.map((group) => (
+                        <section class="flex flex-col gap-4 rounded-2xl border border-line bg-surface p-6">
+                            <h3 class="font-mono text-xs font-medium tracking-widest text-primary uppercase">
+                                {group.title}
+                            </h3>
+                            <ul class="flex flex-wrap gap-2">
+                                {group.items.map((id) => {
+                                    const tech = getTechnology(id);
+                                    return (
+                                        <li class="flex items-center gap-2 rounded-xl bg-surface-alt px-3 py-2 text-[15px] font-semibold">
+                                            <Icon name={tech.icon} size={18} />
+                                            {tech.name}
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                        </section>
+                    ))
+                }
+            </div>
+        </div>
+    </section>
+
+    {
+        latestPosts.length > 0 && (
+            <section class="mx-auto flex max-w-280 flex-col gap-10 px-6 py-20">
+                <SectionHeading
+                    eyebrow="Escribo sobre lo que aprendo"
+                    icon="blog"
+                    title="Últimos posts"
+                    href="/blog"
+                    linkLabel="Ver el blog"
+                />
+                <div class="grid gap-5 md:grid-cols-3">
+                    {latestPosts.map((post) => <PostCard {post} />)}
+                </div>
+            </section>
+        )
+    }
+
+    <CtaBand />
+</PageLayout>

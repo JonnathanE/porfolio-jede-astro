@@ -1,7 +1,7 @@
 ---
-import "../styles/global.css";
+import { Font } from "astro:assets";
 
-import "@fontsource-variable/onest";
+import "../styles/global.css";
 
 interface Props {
     title?: string;
@@ -21,6 +21,7 @@ const {
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <Font cssVariable="--font-onest" preload />
         <meta name="generator" content={Astro.generator} />
         <!-- SEO -->
         <meta name="description" content={description} />
@@ -34,7 +35,12 @@ const {
 
         <!-- Set the theme from the beginning. It should go in the <head> to avoid flashing. -->
         <script is:inline>
-            const saved = localStorage.getItem("theme");
+            let saved = null;
+            try {
+                saved = localStorage.getItem("theme");
+            } catch (error) {
+                console.warn("No se pudo leer el tema guardado:", error);
+            }
             const prefersDark = window.matchMedia(
                 "(prefers-color-scheme: dark)",
             ).matches;
