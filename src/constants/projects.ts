@@ -7,10 +7,6 @@ import barcode2 from "@assets/images/projects/02-barcode-generator.webp";
 import barcode3 from "@assets/images/projects/03-barcode-generator.webp";
 import barcode4 from "@assets/images/projects/04-barcode-generator.webp";
 import squirl from "@assets/images/projects/squirl.webp";
-import work1 from "@assets/images/work-1.png";
-import work2 from "@assets/images/work-2.png";
-import work3 from "@assets/images/work-3.png";
-import work4 from "@assets/images/work-4.png";
 
 export interface Project {
   slug: string;
@@ -28,7 +24,6 @@ export interface Project {
   body: string[];
 }
 
-// Datos de ejemplo (mock): reemplazar por proyectos reales.
 export const PROJECTS: Project[] = [
   {
     slug: "generador-codigos-de-barras",
@@ -82,88 +77,6 @@ export const PROJECTS: Project[] = [
       "El proyecto está en desarrollo y todavía no está desplegado en un servidor.",
     ],
   },
-  // {
-  //   slug: "gestor-de-creditos",
-  //   title: "Gestor de créditos",
-  //   summary:
-  //     "Aplicación web de ejemplo para administrar solicitudes, cuotas y pagos de créditos.",
-  //   date: "Agosto 2026",
-  //   tag: "Fintech",
-  //   category: "Full Stack",
-  //   tech: ["django", "react", "sqlserver", "docker"],
-  //   images: [work1],
-  //   siteUrl: "https://example.com",
-  //   repoUrl: "https://github.com/JonnathanE",
-  //   features: [
-  //     "Registro y seguimiento de solicitudes",
-  //     "Cálculo de cuotas y calendario de pagos",
-  //     "Panel con indicadores de cartera",
-  //     "API REST documentada",
-  //   ],
-  //   body: [
-  //     "Proyecto de ejemplo que muestra cómo se presenta un caso de estudio. Reemplaza este texto con el contexto real: quién lo pidió, qué problema resolvía y cuál fue tu rol.",
-  //     "Aquí puedes explicar las decisiones técnicas más relevantes, los retos encontrados y el resultado final.",
-  //   ],
-  // },
-  // {
-  //   slug: "plataforma-lengua-de-senas",
-  //   title: "Aprende Lengua de Señas",
-  //   summary:
-  //     "Aplicación educativa con lecciones interactivas y pruebas por nivel, inspirada en Duolingo.",
-  //   date: "Septiembre 2022",
-  //   tag: "Titulación",
-  //   category: "Full Stack",
-  //   tech: ["express", "mongodb", "react", "tailwind"],
-  //   images: [work2],
-  //   siteUrl: "https://example.com",
-  //   features: [
-  //     "Lecciones interactivas por nivel",
-  //     "Seguimiento del progreso del usuario",
-  //     "Diseño accesible",
-  //   ],
-  //   body: [
-  //     "Proyecto de titulación de la carrera de Ingeniería en Sistemas. Esta descripción es un texto de ejemplo.",
-  //     "Incluye análisis de requerimientos, diseño de interfaz, backend, base de datos NoSQL y despliegue.",
-  //   ],
-  // },
-  // {
-  //   slug: "intranet-corporativa",
-  //   title: "Intranet corporativa",
-  //   summary:
-  //     "Intranet con WordPress y Elementor, plantillas reutilizables y funcionalidades a medida.",
-  //   date: "Marzo 2025",
-  //   tag: "Freelance",
-  //   category: "WordPress",
-  //   tech: ["wordpress", "elementor", "php", "css"],
-  //   images: [work3],
-  //   features: [
-  //     "Plantillas basadas en diseños de Figma",
-  //     "Componentes reutilizables",
-  //     "Funcionalidades en PHP con Code Snippets",
-  //   ],
-  //   body: [
-  //     "Caso de ejemplo para mostrar un proyecto sin repositorio público. Sustituye este contenido por el real.",
-  //   ],
-  // },
-  // {
-  //   slug: "pipeline-etl-datawarehouse",
-  //   title: "Data Warehouse y ETL",
-  //   summary:
-  //     "Diseño de un Data Warehouse con procesos ETL y migraciones de datos críticas.",
-  //   date: "2024",
-  //   tag: "Datos",
-  //   category: "Backend",
-  //   tech: ["sqlserver", "ssis", "aws"],
-  //   images: [work4],
-  //   features: [
-  //     "Modelo dimensional",
-  //     "Procesos ETL programados",
-  //     "Migraciones de datos controladas",
-  //   ],
-  //   body: [
-  //     "Proyecto de ejemplo del área de datos. Reemplaza con el alcance y el impacto reales.",
-  //   ],
-  // },
 ];
 
 export const getProject = (slug: string): Project | undefined =>
