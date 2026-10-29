@@ -80,8 +80,11 @@ const latestPosts = (await getPosts()).slice(0, 3);
             <Picture
                 src={HeroCharacter}
                 alt="Foto de Jonnathan Espinoza"
-                formats={["webp", "jpg"]}
-                width={800}
+                formats={["avif", "webp"]}
+                fallbackFormat="jpg"
+                width={896}
+                widths={[400, 672, 896]}
+                sizes="(min-width: 496px) 448px, calc(100vw - 48px)"
                 priority
                 class="aspect-square w-full max-w-md rounded-3xl border border-line object-cover object-[50%_25%]"
             />

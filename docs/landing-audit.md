@@ -22,8 +22,9 @@ Ordenadas por prioridad.
 - [x] **Cargar el hero sin diferir**: es el LCP en escritorio.
   - Solución: se agregó la prop `priority` de Astro al `<Picture>` del hero en `src/pages/index.astro` (aplica `loading="eager"`, `decoding="sync"` y `fetchpriority="high"`).
   - Resultado: las auditorías `lcp-lazy-loaded` y `lcp-discovery-insight` pasan; el CLS en escritorio bajó de 0,024 a 0.
-- [ ] **Servir el hero en tamaños responsivos** (ahorro estimado de 12–19 KiB).
-  - Agregar `widths={[400, 600, 800]}` y `sizes="(min-width: 768px) 448px, 100vw"` al `<Picture>` del hero.
+- [x] **Servir el hero en tamaños responsivos** (ahorro estimado de 12–19 KiB).
+  - Solución: el `<Picture>` del hero ahora genera AVIF y WebP en 400, 672 y 896 px, con `sizes="(min-width: 496px) 448px, calc(100vw - 48px)"` y JPG como respaldo en lugar de PNG.
+  - Resultado: la imagen pasó de 25 KiB (WebP) a 13 KiB (AVIF), y la página de 105 a 93 KiB. Las auditorías `uses-responsive-images` e `image-delivery-insight` pasan.
 
 > En producción no aplica el aviso de caché corto: Vercel ya sirve `/_astro/*` con `immutable`.
 
