@@ -19,8 +19,9 @@ Ordenadas por prioridad.
   - Causa: `@fontsource-variable/onest` usa `font-display: swap` y el texto se re-acomoda al cargar el `.woff2`.
   - Solución: se migró a la API `fonts` de Astro, que precarga el `.woff2` y genera el fallback con métricas sobre Arial. También se quitó JetBrains Mono, que no se cargaba.
   - Resultado: el CLS bajó a 0 en móvil y a 0,024 en escritorio; el rendimiento quedó en 100 en ambos.
-- [ ] **Cargar el hero sin diferir**: es el LCP en escritorio.
-  - En `src/pages/index.astro`, agregar `loading="eager"` y `fetchpriority="high"` al `<Picture>` del hero.
+- [x] **Cargar el hero sin diferir**: es el LCP en escritorio.
+  - Solución: se agregó la prop `priority` de Astro al `<Picture>` del hero en `src/pages/index.astro` (aplica `loading="eager"`, `decoding="sync"` y `fetchpriority="high"`).
+  - Resultado: las auditorías `lcp-lazy-loaded` y `lcp-discovery-insight` pasan; el CLS en escritorio bajó de 0,024 a 0.
 - [ ] **Servir el hero en tamaños responsivos** (ahorro estimado de 12–19 KiB).
   - Agregar `widths={[400, 600, 800]}` y `sizes="(min-width: 768px) 448px, 100vw"` al `<Picture>` del hero.
 
