@@ -22,6 +22,8 @@ const fieldClass =
 
         <div class="flex flex-wrap items-start gap-8">
             <form
+                id="contactForm"
+                method="post"
                 class="flex min-w-0 flex-1 basis-130 flex-col gap-5 rounded-2xl border border-line p-8"
             >
                 <div class="flex flex-col gap-2">
@@ -32,6 +34,9 @@ const fieldClass =
                         type="text"
                         autocomplete="name"
                         placeholder="Tu nombre"
+                        required
+                        minlength="2"
+                        maxlength="100"
                         class={`${fieldClass} min-h-12`}
                     />
                 </div>
@@ -45,6 +50,7 @@ const fieldClass =
                         type="email"
                         autocomplete="email"
                         placeholder="tucorreo@ejemplo.com"
+                        required
                         class={`${fieldClass} min-h-12`}
                     />
                 </div>
@@ -55,9 +61,31 @@ const fieldClass =
                         name="mensaje"
                         rows="6"
                         placeholder="¿En qué te puedo ayudar?"
+                        required
+                        minlength="10"
+                        maxlength="5000"
                         class={`${fieldClass} py-3.5`}></textarea>
                 </div>
-                <Button type="submit" class="self-start">Enviar mensaje</Button>
+                <div class="hidden" aria-hidden="true">
+                    <label for="empresa">Empresa</label>
+                    <input
+                        id="empresa"
+                        name="empresa"
+                        type="text"
+                        tabindex="-1"
+                        autocomplete="off"
+                    />
+                </div>
+                <Button type="submit" class="self-start disabled:opacity-60">
+                    Enviar mensaje
+                </Button>
+                <p
+                    id="contactStatus"
+                    role="status"
+                    aria-live="polite"
+                    class="min-h-6 text-sm font-semibold"
+                >
+                </p>
             </form>
 
             <aside class="flex min-w-0 flex-1 basis-72 flex-col gap-4">
@@ -68,10 +96,11 @@ const fieldClass =
                         CORREO
                     </span>
                     <a
-                        href={`mailto:${SITE.email}`}
+                        href="#contactForm"
+                        data-email={SITE.emailEncoded}
                         class="break-all text-lg font-bold hover:underline"
                     >
-                        {SITE.email}
+                        Escríbeme un correo
                     </a>
                 </div>
                 <div
@@ -105,3 +134,37 @@ const fieldClass =
         </div>
     </div>
 </PageLayout>
+
+<script>
+    import { actions, isInputError } from "astro:actions";
+    import "@/scripts/revealEmail";
+
+    const form = document.querySelector<HTMLFormElement>("#contactForm");
+    const status = document.querySelector<HTMLParagraphElement>("#contactStatus");
+
+    form?.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        if (!status) return;
+
+        const submit = form.querySelector<HTMLButtonElement>("[type=submit]");
+        if (submit) submit.disabled = true;
+        status.className = "min-h-6 text-sm font-semibold text-muted";
+        status.textContent = "Enviando…";
+
+        const { error } = await actions.sendContact(new FormData(form));
+
+        if (submit) submit.disabled = false;
+
+        if (!error) {
+            form.reset();
+            status.className = "min-h-6 text-sm font-semibold text-green-600";
+            status.textContent = "¡Gracias! Tu mensaje fue enviado.";
+            return;
+        }
+
+        status.className = "min-h-6 text-sm font-semibold text-red-600";
+        status.textContent = isInputError(error)
+            ? Object.values(error.fields).flat().join(" ")
+            : "No se pudo enviar el mensaje. Inténtalo de nuevo más tarde.";
+    });
+</script>

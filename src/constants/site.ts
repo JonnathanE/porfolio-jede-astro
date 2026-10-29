@@ -1,6 +1,7 @@
 export const SITE = {
     name: "Jonnathan Espinoza",
-    email: "jonaes930@gmail.com",
+    // Base64 to keep the address out of the static HTML (see revealEmail.ts).
+    emailEncoded: "am9uYWVzOTMwQGdtYWlsLmNvbQ==",
     location: "Ecuador",
     cv: "/documents/CV-Jonnathan-Espinoza-es.pdf",
     tagline:
