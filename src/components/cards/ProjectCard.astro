@@ -8,9 +8,11 @@ import TechTag from "@/components/ui/TechTag.astro";
 
 interface Props {
     project: Project;
+    headingLevel?: 2 | 3;
 }
 
-const { project } = Astro.props;
+const { project, headingLevel = 3 } = Astro.props;
+const Heading = `h${headingLevel}` as const;
 const href = `/projects/${project.slug}`;
 const repoIcon = project.repoUrl?.includes("gitlab") ? "gitlab" : "github";
 const repoLabel = repoIcon === "gitlab" ? "GitLab" : "GitHub";
@@ -33,14 +35,14 @@ const linkClass =
     <div class="flex flex-1 flex-col gap-2.5 p-5">
         <span class="font-mono text-xs text-muted">{project.date}</span>
         <div class="flex flex-wrap items-center gap-2">
-            <h3 class="text-xl font-bold text-text">
+            <Heading class="text-xl font-bold text-text">
                 <a
                     href={href}
                     class="after:absolute after:inset-0 after:content-[''] group-hover:text-primary"
                 >
                     {project.title}
                 </a>
-            </h3>
+            </Heading>
             <Tag variant="accent">{project.tag}</Tag>
         </div>
         <p class="text-[15px] leading-relaxed text-muted">{project.summary}</p>

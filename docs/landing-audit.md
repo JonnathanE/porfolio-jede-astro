@@ -45,11 +45,16 @@ Ordenadas por prioridad.
 
 ### Accesibilidad
 
-- [ ] **Corregir el nombre accesible del logo "JE"** en `src/components/layout/Header.astro`.
-  - El `aria-label="Inicio"` no incluye el texto visible "JE", y eso falla con el control por voz.
-  - Usar `aria-label="JE – Inicio"`, o quitar el `aria-label` y agregar `<span class="sr-only">Inicio</span>`.
-- [ ] **Verificar el contraste en el tema oscuro**: Lighthouse solo auditó el tema claro.
-- [ ] **Proteger el acceso a `localStorage`** en el script del tema de `Layout.astro` con `try/catch`, como pide `AGENTS.md`.
+- [x] **Corregir el nombre accesible del logo "JE"** en `src/components/layout/Header.astro`.
+  - El `aria-label="Inicio"` no incluía el texto visible "JE", y eso falla con el control por voz.
+  - Solución: se quitó el `aria-label` y se agregó `<span class="sr-only"> – Inicio</span>`; el nombre accesible queda "JE – Inicio".
+- [x] **Verificar el contraste en el tema oscuro**: Lighthouse solo había auditado el tema claro.
+  - Se auditaron 6 páginas con `--force-dark-mode` (confirmado con captura). `color-contrast` pasa en todas.
+- [x] **Proteger el acceso a `localStorage`** en el script del tema de `Layout.astro` con `try/catch`, como pide `AGENTS.md`.
+- [x] **Corregir el orden de encabezados en `/projects`** (hallado durante la auditoría en tema oscuro).
+  - La página saltaba de `h1` a `h3`. `ProjectCard` ahora acepta `headingLevel` (por defecto `3`) y `/projects` usa `2`.
+
+Resultado: accesibilidad en 100 en las 6 páginas (inicio, contacto, perfil, proyectos, experiencia y blog), en tema claro y oscuro, sin avisos.
 
 ## Cómo volver a medir
 

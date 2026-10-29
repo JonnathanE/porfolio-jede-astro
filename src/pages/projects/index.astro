@@ -16,7 +16,11 @@ import { PROJECTS } from "@/constants/projects";
             description={`Una selección de proyectos en los que he trabajado. ${PROJECTS.length} en total.`}
         />
         <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {PROJECTS.map((project) => <ProjectCard {project} />)}
+            {
+                PROJECTS.map((project) => (
+                    <ProjectCard {project} headingLevel={2} />
+                ))
+            }
         </div>
     </div>
 </PageLayout>
