@@ -4,8 +4,8 @@
 
 @theme {
     /*Typography*/
-    --font-sans: "Onest Variable", sans-serif;
-    --font-mono: "JetBrains Mono", ui-monospace, monospace;
+    --font-sans: var(--font-onest);
+    --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
     /*Colors*/
     --color-primary: var(--color-primary-value);

@@ -15,10 +15,10 @@ Ordenadas por prioridad.
 
 ### Rendimiento
 
-- [ ] **Reducir el CLS causado por la fuente Onest** (0,21 en móvil, 0,13 en escritorio).
+- [x] **Reducir el CLS causado por la fuente Onest** (0,21 en móvil, 0,13 en escritorio).
   - Causa: `@fontsource-variable/onest` usa `font-display: swap` y el texto se re-acomoda al cargar el `.woff2`.
-  - Precargar el `.woff2` con `<link rel="preload" as="font" type="font/woff2" crossorigin>` en `src/layouts/Layout.astro`.
-  - Definir un fallback con métricas ajustadas (`size-adjust`, `ascent-override`, etc. sobre Arial), o migrar a la API `fonts` de Astro, que lo genera automáticamente.
+  - Solución: se migró a la API `fonts` de Astro, que precarga el `.woff2` y genera el fallback con métricas sobre Arial. También se quitó JetBrains Mono, que no se cargaba.
+  - Resultado: el CLS bajó a 0 en móvil y a 0,024 en escritorio; el rendimiento quedó en 100 en ambos.
 - [ ] **Cargar el hero sin diferir**: es el LCP en escritorio.
   - En `src/pages/index.astro`, agregar `loading="eager"` y `fetchpriority="high"` al `<Picture>` del hero.
 - [ ] **Servir el hero en tamaños responsivos** (ahorro estimado de 12–19 KiB).
