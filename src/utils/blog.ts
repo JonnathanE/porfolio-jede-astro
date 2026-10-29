@@ -13,7 +13,11 @@ const dateFormatter = new Intl.DateTimeFormat("es", {
 });
 
 export const getPosts = async (): Promise<Post[]> => {
-  const posts = await getCollection("blog");
+  // Los borradores solo se muestran en desarrollo.
+  const posts = await getCollection(
+    "blog",
+    ({ data }) => import.meta.env.DEV || !data.draft,
+  );
   return posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 };
 

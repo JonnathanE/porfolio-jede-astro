@@ -146,6 +146,25 @@ const { Content } = await render(post);
         color: var(--shiki-dark) !important;
     }
 
+    .post-content :global(table) {
+        display: block;
+        overflow-x: auto;
+        border-collapse: collapse;
+        font-size: var(--text-base);
+    }
+
+    .post-content :global(:is(th, td)) {
+        border-bottom: 1px solid var(--color-line);
+        padding: 0.5rem 1rem 0.5rem 0;
+        text-align: left;
+        vertical-align: top;
+    }
+
+    .post-content :global(th) {
+        font-weight: 700;
+        color: var(--color-text);
+    }
+
     .post-content :global(img) {
         border: 1px solid var(--color-line);
         border-radius: var(--radius-card);
