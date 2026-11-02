@@ -14,7 +14,6 @@ export interface Course {
   icon?: ImageMetadata;
 }
 
-// Datos de ejemplo (mock): reemplazar por cursos reales.
 export const COURSES: Course[] = [
   {
     title: "Principios SOLID y Clean Code",

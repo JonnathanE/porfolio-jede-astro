@@ -24,20 +24,14 @@ const latestPosts = (await getPosts()).slice(0, 3);
 ---
 
 <PageLayout
-    title="Portafolio de Jonnathan Espinoza - Desarrollador y Programador Web"
-    description="Contrata a Jonnathan Espinoza, un desarrollador web con más de 3 años de experiencia en la creación de aplicaciones únicas y personalizadas."
+    title="Jonnathan Espinoza | Desarrollador Full Stack"
+    description="Desarrollador Full Stack especializado en Backend, con más de 4 años construyendo software para el sector financiero: APIs REST, bases de datos, ETL e interfaces."
     image="/images/perfil_hero.jpg"
 >
     <section
         class="mx-auto flex max-w-280 flex-wrap items-center gap-12 px-6 pt-16 pb-20"
     >
         <div class="flex min-w-0 flex-1 basis-120 flex-col gap-6">
-            <span
-                class="inline-flex items-center gap-2.5 self-start rounded-full border border-line px-4 py-2 text-sm text-muted"
-            >
-                <span class="h-2 w-2 rounded-full bg-green-600"></span>
-                Disponible para trabajos independientes
-            </span>
             <h1
                 class="text-5xl font-extrabold leading-[1.08] tracking-tight md:text-6xl"
             >
@@ -60,7 +54,7 @@ const latestPosts = (await getPosts()).slice(0, 3);
                 </Button>
             </div>
             <div class="flex items-center gap-4">
-                <span class="text-muted">Sígueme:</span>
+                <span class="text-muted">Encuéntrame en:</span>
                 {
                     socialLinks.map(({ icon, href, label }) => (
                         <a
@@ -97,7 +91,7 @@ const latestPosts = (await getPosts()).slice(0, 3);
                 eyebrow="Trayectoria"
                 icon="suitcase-line" title="Experiencia"
                 href="/experience"
-                linkLabel="Ver toda mi experiencia"
+                linkLabel="Ver el detalle de mi experiencia"
             />
             <div class="grid gap-5 md:grid-cols-3">
                 {
@@ -115,8 +109,8 @@ const latestPosts = (await getPosts()).slice(0, 3);
                             <span class="font-semibold text-primary">
                                 {exp.company}
                             </span>
-                            <p class="line-clamp-4 text-[15px] leading-relaxed text-muted">
-                                {exp.description}
+                            <p class="text-[15px] leading-relaxed text-muted">
+                                {exp.summary}
                             </p>
                         </article>
                     ))
@@ -127,10 +121,10 @@ const latestPosts = (await getPosts()).slice(0, 3);
 
     <section class="mx-auto flex max-w-280 flex-col gap-10 px-6 py-20">
         <SectionHeading
-            eyebrow="Trabajo seleccionado"
+            eyebrow="Trabajo personal"
             icon="folder-outline" title="Proyectos"
             href="/projects"
-            linkLabel="Ver más proyectos"
+            linkLabel="Ver todos los proyectos"
         />
         <div class="grid gap-6 md:grid-cols-3">
             {featuredProjects.map((project) => <ProjectCard {project} />)}
@@ -139,7 +133,7 @@ const latestPosts = (await getPosts()).slice(0, 3);
 
     <section class="border-y border-line bg-surface-alt">
         <div class="mx-auto flex max-w-280 flex-col gap-10 px-6 py-20">
-            <SectionHeading eyebrow="Herramientas" icon="git-branch" title="Tecnologías" />
+            <SectionHeading eyebrow="Con qué trabajo" icon="git-branch" title="Tecnologías" />
             <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
                 {
                     TECH_CATEGORIES.map((group) => (
@@ -171,7 +165,7 @@ const latestPosts = (await getPosts()).slice(0, 3);
                 <SectionHeading
                     eyebrow="Escribo sobre lo que aprendo"
                     icon="blog"
-                    title="Últimos posts"
+                    title="Últimos artículos"
                     href="/blog"
                     linkLabel="Ver el blog"
                 />
