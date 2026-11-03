@@ -1,6 +1,6 @@
 ---
 interface Props {
-    variant?: "primary" | "outline" | "accent" | "inverse";
+    variant?: "primary" | "outline";
     size?: "md" | "lg";
     href?: string;
     id?: string;
@@ -24,8 +24,6 @@ const base =
 const variants = {
     primary: "bg-primary text-on-primary",
     outline: "border-[1.5px] border-text text-text",
-    accent: "bg-accent text-on-accent",
-    inverse: "border-[1.5px] border-on-primary text-on-primary",
 };
 
 const sizes = {
