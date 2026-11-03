@@ -9,7 +9,7 @@ import SectionHeading from "@/components/ui/SectionHeading.astro";
 import ProjectCard from "@/components/cards/ProjectCard.astro";
 import PostCard from "@/components/cards/PostCard.astro";
 import CtaBand from "@/components/sections/CtaBand.astro";
-import { EXPERIENCE } from "@/constants/experience";
+import { EXPERIENCE, type Experience } from "@/constants/experience";
 import { PROJECTS } from "@/constants/projects";
 import { SITE } from "@/constants/site";
 import { socialLinks } from "@/constants/socialLinks";
@@ -18,35 +18,36 @@ import { getPosts } from "@utils/blog";
 
 import HeroCharacter from "@assets/images/hero-character.webp";
 
-const latestExperience = EXPERIENCE.slice(0, 3);
+const featuredExperience = EXPERIENCE.find((exp) => exp.feature);
+const otherExperience = EXPERIENCE.filter(
+    (exp) => exp !== featuredExperience,
+).slice(0, 2);
+const experiencePeriod = (exp: Experience) =>
+    `${exp.startMonth} ${exp.startYear} – ${
+        exp.currentlyWorking ? "Actualidad" : `${exp.endMonth} ${exp.endYear}`
+    }`;
 const featuredProjects = PROJECTS.slice(0, 3);
 const latestPosts = (await getPosts()).slice(0, 3);
 ---
 
 <PageLayout
-    title="Portafolio de Jonnathan Espinoza - Desarrollador y Programador Web"
-    description="Contrata a Jonnathan Espinoza, un desarrollador web con más de 3 años de experiencia en la creación de aplicaciones únicas y personalizadas."
+    title="Jonnathan Espinoza | Desarrollador Full Stack"
+    description="Desarrollador Full Stack especializado en Backend, con más de 4 años construyendo software para el sector financiero: APIs REST, bases de datos, ETL e interfaces."
     image="/images/perfil_hero.jpg"
 >
     <section
         class="mx-auto flex max-w-280 flex-wrap items-center gap-12 px-6 pt-16 pb-20"
     >
         <div class="flex min-w-0 flex-1 basis-120 flex-col gap-6">
-            <span
-                class="inline-flex items-center gap-2.5 self-start rounded-full border border-line px-4 py-2 text-sm text-muted"
-            >
-                <span class="h-2 w-2 rounded-full bg-green-600"></span>
-                Disponible para trabajos independientes
-            </span>
             <h1
                 class="text-5xl font-extrabold leading-[1.08] tracking-tight md:text-6xl"
             >
-                Hola, soy <span class="text-primary">{SITE.name}</span>
+                Hola, soy <span class="inline-block text-primary">{SITE.name}</span>
             </h1>
             <div class="flex flex-wrap gap-2">
                 {SITE.roles.map((role) => <Tag variant="soft">{role}</Tag>)}
             </div>
-            <p class="max-w-xl text-lg leading-relaxed text-muted">
+            <p class="max-w-xl text-lg leading-relaxed text-pretty text-muted">
                 {SITE.tagline}
             </p>
             <div class="flex flex-wrap gap-3">
@@ -60,7 +61,7 @@ const latestPosts = (await getPosts()).slice(0, 3);
                 </Button>
             </div>
             <div class="flex items-center gap-4">
-                <span class="text-muted">Sígueme:</span>
+                <span class="text-muted">Encuéntrame en:</span>
                 {
                     socialLinks.map(({ icon, href, label }) => (
                         <a
@@ -97,26 +98,59 @@ const latestPosts = (await getPosts()).slice(0, 3);
                 eyebrow="Trayectoria"
                 icon="suitcase-line" title="Experiencia"
                 href="/experience"
-                linkLabel="Ver toda mi experiencia"
+                linkLabel="Ver el detalle de mi experiencia"
             />
-            <div class="grid gap-5 md:grid-cols-3">
-                {
-                    latestExperience.map((exp) => (
-                        <article class="flex flex-col gap-3 rounded-2xl border border-line bg-surface p-6">
-                            <span class="font-mono text-xs text-muted">
-                                {exp.startMonth} {exp.startYear} –{" "}
-                                {exp.currentlyWorking
-                                    ? "Actualidad"
-                                    : `${exp.endMonth} ${exp.endYear}`}
+            {
+                featuredExperience?.feature && (
+                    <article class="grid gap-10 rounded-3xl bg-primary p-6 text-on-primary md:p-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,22rem)] lg:gap-12 lg:p-12">
+                        <div class="flex flex-col gap-5">
+                            <span class="font-mono text-sm">
+                                {experiencePeriod(featuredExperience)}
                             </span>
-                            <h3 class="text-xl font-bold leading-snug">
+                            <h3 class="text-[clamp(2.25rem,11.5vw,6rem)] leading-none font-extrabold tracking-tight lg:text-[clamp(4.5rem,7.5vw,6rem)]">
+                                {featuredExperience.feature.name}
+                            </h3>
+                            <p class="max-w-lg text-xl leading-snug font-bold text-pretty md:text-2xl">
+                                {featuredExperience.feature.product}
+                            </p>
+                            <p class="leading-relaxed">
+                                {featuredExperience.feature.role}
+                                <br />
+                                {featuredExperience.company}
+                            </p>
+                        </div>
+                        <dl class="self-center">
+                            {
+                                featuredExperience.feature.scope.map(
+                                    ({ label, detail }) => (
+                                        <div class="border-t border-on-primary/30 py-3.5 first:border-t-0 first:pt-0 last:pb-0">
+                                            <dt class="font-bold">{label}</dt>
+                                            <dd class="mt-0.5 text-[15px] leading-relaxed text-on-primary/85">
+                                                {detail}
+                                            </dd>
+                                        </div>
+                                    ),
+                                )
+                            }
+                        </dl>
+                    </article>
+                )
+            }
+            <div class="grid gap-x-12 gap-y-8 md:grid-cols-2">
+                {
+                    otherExperience.map((exp) => (
+                        <article class="flex flex-col gap-2 border-t border-line pt-5">
+                            <span class="font-mono text-xs text-muted">
+                                {experiencePeriod(exp)}
+                            </span>
+                            <h3 class="text-lg font-bold leading-snug">
                                 {exp.title}
                             </h3>
                             <span class="font-semibold text-primary">
                                 {exp.company}
                             </span>
-                            <p class="line-clamp-4 text-[15px] leading-relaxed text-muted">
-                                {exp.description}
+                            <p class="text-[15px] leading-relaxed text-muted">
+                                {exp.summary}
                             </p>
                         </article>
                     ))
@@ -127,19 +161,24 @@ const latestPosts = (await getPosts()).slice(0, 3);
 
     <section class="mx-auto flex max-w-280 flex-col gap-10 px-6 py-20">
         <SectionHeading
-            eyebrow="Trabajo seleccionado"
+            eyebrow="Trabajo personal"
             icon="folder-outline" title="Proyectos"
             href="/projects"
-            linkLabel="Ver más proyectos"
+            linkLabel="Ver todos los proyectos"
         />
-        <div class="grid gap-6 md:grid-cols-3">
+        <div
+            class:list={[
+                "grid gap-6 md:grid-cols-2",
+                featuredProjects.length >= 3 && "lg:grid-cols-3",
+            ]}
+        >
             {featuredProjects.map((project) => <ProjectCard {project} />)}
         </div>
     </section>
 
     <section class="border-y border-line bg-surface-alt">
         <div class="mx-auto flex max-w-280 flex-col gap-10 px-6 py-20">
-            <SectionHeading eyebrow="Herramientas" icon="git-branch" title="Tecnologías" />
+            <SectionHeading eyebrow="Con qué trabajo" icon="git-branch" title="Tecnologías" />
             <div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
                 {
                     TECH_CATEGORIES.map((group) => (
@@ -167,15 +206,22 @@ const latestPosts = (await getPosts()).slice(0, 3);
 
     {
         latestPosts.length > 0 && (
-            <section class="mx-auto flex max-w-280 flex-col gap-10 px-6 py-20">
+            <section class="mx-auto flex max-w-280 flex-col gap-10 px-6 pt-20">
                 <SectionHeading
                     eyebrow="Escribo sobre lo que aprendo"
                     icon="blog"
-                    title="Últimos posts"
+                    title="Últimos artículos"
                     href="/blog"
                     linkLabel="Ver el blog"
                 />
-                <div class="grid gap-5 md:grid-cols-3">
+                <div
+                    class:list={[
+                        "grid gap-5",
+                        latestPosts.length === 1
+                            ? "max-w-2xl"
+                            : "md:grid-cols-2 lg:grid-cols-3",
+                    ]}
+                >
                     {latestPosts.map((post) => <PostCard {post} />)}
                 </div>
             </section>

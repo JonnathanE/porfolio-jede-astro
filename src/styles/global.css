@@ -61,6 +61,22 @@ html {
     scroll-behavior: smooth;
 }
 
+@layer base {
+    html {
+        scrollbar-color: var(--color-line) transparent;
+    }
+
+    :focus-visible {
+        outline: 2px solid var(--color-primary);
+        outline-offset: 2px;
+    }
+
+    ::selection {
+        background-color: var(--color-primary);
+        color: var(--color-on-primary);
+    }
+}
+
 body {
     overflow-x: hidden;
 }

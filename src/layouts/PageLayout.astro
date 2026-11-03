@@ -13,8 +13,14 @@ const props = Astro.props;
 ---
 
 <Layout {...props}>
+    <a
+        href="#contenido"
+        class="sr-only z-60 rounded-xl bg-primary font-bold text-on-primary focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:px-4 focus:py-3"
+    >
+        Saltar al contenido
+    </a>
     <Header />
-    <main>
+    <main id="contenido">
         <slot />
     </main>
     <Footer />

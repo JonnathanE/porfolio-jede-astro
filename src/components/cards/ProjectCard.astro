@@ -17,11 +17,11 @@ const href = `/projects/${project.slug}`;
 const repoIcon = project.repoUrl?.includes("gitlab") ? "gitlab" : "github";
 const repoLabel = repoIcon === "gitlab" ? "GitLab" : "GitHub";
 const linkClass =
-    "relative z-10 flex h-10 w-10 items-center justify-center rounded-xl text-muted hover:bg-surface-alt hover:text-primary";
+    "relative z-10 flex h-11 w-11 items-center justify-center rounded-xl text-muted hover:bg-surface-alt hover:text-primary";
 ---
 
 <article
-    class="group relative flex flex-col overflow-hidden rounded-2xl border border-line bg-surface transition duration-200 hover:-translate-y-1 hover:border-primary hover:shadow-lg focus-within:border-primary"
+    class="group relative flex flex-col overflow-hidden rounded-2xl border border-line bg-surface transition duration-200 motion-safe:hover:-translate-y-1 hover:border-primary hover:shadow-lg focus-within:border-primary"
 >
     <div class="block border-b border-line bg-surface-alt">
         <Picture
@@ -29,7 +29,7 @@ const linkClass =
             alt={`Captura de ${project.title}`}
             formats={["webp", "jpg"]}
             width={640}
-            class="h-48 w-full object-cover"
+            class="aspect-video w-full object-cover object-top"
         />
     </div>
     <div class="flex flex-1 flex-col gap-2.5 p-5">
@@ -43,7 +43,7 @@ const linkClass =
                     {project.title}
                 </a>
             </Heading>
-            <Tag variant="accent">{project.tag}</Tag>
+            <Tag variant="soft">{project.tag}</Tag>
         </div>
         <p class="text-[15px] leading-relaxed text-muted">{project.summary}</p>
         <div class="mt-auto flex flex-wrap gap-1.5 pt-2">

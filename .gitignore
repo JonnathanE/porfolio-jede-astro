@@ -27,3 +27,12 @@ pnpm-debug.log*
 
 # Vercel adapter output
 .vercel/
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# Gemini CLI settings (Impeccable hooks use absolute local paths)
+.gemini/
+
+# Impeccable engine binary (downloaded by its launcher)
+.claude/skills/impeccable/scripts/bin/

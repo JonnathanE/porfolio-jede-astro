@@ -10,7 +10,7 @@ const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 ---
 
-<header class="sticky top-0 z-50 border-b border-line bg-surface">
+<header class="z-50 border-b border-line bg-surface md:sticky md:top-0">
     <div
         class="mx-auto flex max-w-280 flex-wrap items-center justify-between gap-3 px-6 py-3.5"
     >
@@ -33,7 +33,7 @@ const isActive = (href: string) =>
                                 : "text-text hover:bg-surface-alt",
                         ]}
                     >
-                        <Icon name={item.icon} size={18} />
+                        <Icon name={item.icon} size={18} class="hidden lg:block" />
                         {item.label}
                     </a>
                 ))
