@@ -27,6 +27,13 @@ export type MonthName =
   | "Noviembre"
   | "Diciembre";
 
+export interface ExperienceFeature {
+  name: string;
+  role: string;
+  product: string;
+  scope: { label: string; detail: string }[];
+}
+
 export interface Experience {
   startMonth: MonthName;
   startYear: number;
@@ -41,6 +48,8 @@ export interface Experience {
   summary: string;
   description: string;
   tech: TechId[];
+  // Se destaca en el inicio como el trabajo principal.
+  feature?: ExperienceFeature;
 }
 
 // Data
@@ -60,6 +69,18 @@ export const EXPERIENCE: Experience[] = [
       "Desarrollo de Cartera365, una aplicación web de gestión de créditos: APIs REST e interfaces, SQL Server, ETL con SSIS, Data Warehouse y despliegues en AWS.",
     description:
       "Desarrollo y optimización de CARTERA365, una aplicación web para la gestión de créditos, implementando APIs REST e interfaces de usuario con Django REST Framework y React.js. Optimización y administración de bases de datos SQL Server, automatización de procesos ETL con SSIS e implementación de un Data Warehouse para la integración y análisis de datos. Transformación de requerimientos en soluciones técnicas, entrega de nuevas funcionalidades y resolución de incidencias. Gestión de despliegues y mantenimiento en AWS. Colaboración en proyectos de Fastline con Spring Boot y Angular.",
+    feature: {
+      name: "Cartera365",
+      role: "Desarrollador Full Stack",
+      product: "Aplicación web de gestión de créditos para el sector financiero.",
+      scope: [
+        { label: "APIs e interfaces", detail: "Django REST Framework y React.js" },
+        { label: "Bases de datos", detail: "Optimización y administración de SQL Server" },
+        { label: "ETL", detail: "Automatización de procesos con SSIS" },
+        { label: "Data Warehouse", detail: "Integración y análisis de datos" },
+        { label: "Despliegues", detail: "Gestión y mantenimiento en AWS" },
+      ],
+    },
     tech: [
       "django",
       "springboot",

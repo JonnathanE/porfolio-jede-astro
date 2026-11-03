@@ -9,7 +9,7 @@ import SectionHeading from "@/components/ui/SectionHeading.astro";
 import ProjectCard from "@/components/cards/ProjectCard.astro";
 import PostCard from "@/components/cards/PostCard.astro";
 import CtaBand from "@/components/sections/CtaBand.astro";
-import { EXPERIENCE } from "@/constants/experience";
+import { EXPERIENCE, type Experience } from "@/constants/experience";
 import { PROJECTS } from "@/constants/projects";
 import { SITE } from "@/constants/site";
 import { socialLinks } from "@/constants/socialLinks";
@@ -18,7 +18,14 @@ import { getPosts } from "@utils/blog";
 
 import HeroCharacter from "@assets/images/hero-character.webp";
 
-const latestExperience = EXPERIENCE.slice(0, 3);
+const featuredExperience = EXPERIENCE.find((exp) => exp.feature);
+const otherExperience = EXPERIENCE.filter(
+    (exp) => exp !== featuredExperience,
+).slice(0, 2);
+const experiencePeriod = (exp: Experience) =>
+    `${exp.startMonth} ${exp.startYear} – ${
+        exp.currentlyWorking ? "Actualidad" : `${exp.endMonth} ${exp.endYear}`
+    }`;
 const featuredProjects = PROJECTS.slice(0, 3);
 const latestPosts = (await getPosts()).slice(0, 3);
 ---
@@ -93,17 +100,50 @@ const latestPosts = (await getPosts()).slice(0, 3);
                 href="/experience"
                 linkLabel="Ver el detalle de mi experiencia"
             />
-            <div class="grid gap-5 lg:grid-cols-3">
-                {
-                    latestExperience.map((exp) => (
-                        <article class="flex flex-col gap-3 rounded-2xl border border-line bg-surface p-6">
-                            <span class="font-mono text-xs text-muted">
-                                {exp.startMonth} {exp.startYear} –{" "}
-                                {exp.currentlyWorking
-                                    ? "Actualidad"
-                                    : `${exp.endMonth} ${exp.endYear}`}
+            {
+                featuredExperience?.feature && (
+                    <article class="grid gap-10 rounded-3xl bg-primary p-6 text-on-primary md:p-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,22rem)] lg:gap-12 lg:p-12">
+                        <div class="flex flex-col gap-5">
+                            <span class="font-mono text-sm">
+                                {experiencePeriod(featuredExperience)}
                             </span>
-                            <h3 class="text-xl font-bold leading-snug">
+                            <h3 class="text-[clamp(2.25rem,11.5vw,6rem)] leading-none font-extrabold tracking-tight lg:text-[clamp(4.5rem,7.5vw,6rem)]">
+                                {featuredExperience.feature.name}
+                            </h3>
+                            <p class="max-w-lg text-xl leading-snug font-bold text-pretty md:text-2xl">
+                                {featuredExperience.feature.product}
+                            </p>
+                            <p class="leading-relaxed">
+                                {featuredExperience.feature.role}
+                                <br />
+                                {featuredExperience.company}
+                            </p>
+                        </div>
+                        <dl class="self-center">
+                            {
+                                featuredExperience.feature.scope.map(
+                                    ({ label, detail }) => (
+                                        <div class="border-t border-on-primary/30 py-3.5 first:border-t-0 first:pt-0 last:pb-0">
+                                            <dt class="font-bold">{label}</dt>
+                                            <dd class="mt-0.5 text-[15px] leading-relaxed text-on-primary/85">
+                                                {detail}
+                                            </dd>
+                                        </div>
+                                    ),
+                                )
+                            }
+                        </dl>
+                    </article>
+                )
+            }
+            <div class="grid gap-x-12 gap-y-8 md:grid-cols-2">
+                {
+                    otherExperience.map((exp) => (
+                        <article class="flex flex-col gap-2 border-t border-line pt-5">
+                            <span class="font-mono text-xs text-muted">
+                                {experiencePeriod(exp)}
+                            </span>
+                            <h3 class="text-lg font-bold leading-snug">
                                 {exp.title}
                             </h3>
                             <span class="font-semibold text-primary">
