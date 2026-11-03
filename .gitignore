@@ -27,3 +27,9 @@ pnpm-debug.log*
 
 # Vercel adapter output
 .vercel/
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# Impeccable engine binary (downloaded by its launcher)
+.claude/skills/impeccable/scripts/bin/
