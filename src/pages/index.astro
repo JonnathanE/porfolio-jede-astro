@@ -35,12 +35,12 @@ const latestPosts = (await getPosts()).slice(0, 3);
             <h1
                 class="text-5xl font-extrabold leading-[1.08] tracking-tight md:text-6xl"
             >
-                Hola, soy <span class="text-primary">{SITE.name}</span>
+                Hola, soy <span class="inline-block text-primary">{SITE.name}</span>
             </h1>
             <div class="flex flex-wrap gap-2">
                 {SITE.roles.map((role) => <Tag variant="soft">{role}</Tag>)}
             </div>
-            <p class="max-w-xl text-lg leading-relaxed text-muted">
+            <p class="max-w-xl text-lg leading-relaxed text-pretty text-muted">
                 {SITE.tagline}
             </p>
             <div class="flex flex-wrap gap-3">
@@ -93,7 +93,7 @@ const latestPosts = (await getPosts()).slice(0, 3);
                 href="/experience"
                 linkLabel="Ver el detalle de mi experiencia"
             />
-            <div class="grid gap-5 md:grid-cols-3">
+            <div class="grid gap-5 lg:grid-cols-3">
                 {
                     latestExperience.map((exp) => (
                         <article class="flex flex-col gap-3 rounded-2xl border border-line bg-surface p-6">
@@ -126,7 +126,12 @@ const latestPosts = (await getPosts()).slice(0, 3);
             href="/projects"
             linkLabel="Ver todos los proyectos"
         />
-        <div class="grid gap-6 md:grid-cols-3">
+        <div
+            class:list={[
+                "grid gap-6 md:grid-cols-2",
+                featuredProjects.length >= 3 && "lg:grid-cols-3",
+            ]}
+        >
             {featuredProjects.map((project) => <ProjectCard {project} />)}
         </div>
     </section>
@@ -161,7 +166,7 @@ const latestPosts = (await getPosts()).slice(0, 3);
 
     {
         latestPosts.length > 0 && (
-            <section class="mx-auto flex max-w-280 flex-col gap-10 px-6 py-20">
+            <section class="mx-auto flex max-w-280 flex-col gap-10 px-6 pt-20">
                 <SectionHeading
                     eyebrow="Escribo sobre lo que aprendo"
                     icon="blog"
@@ -169,7 +174,14 @@ const latestPosts = (await getPosts()).slice(0, 3);
                     href="/blog"
                     linkLabel="Ver el blog"
                 />
-                <div class="grid gap-5 md:grid-cols-3">
+                <div
+                    class:list={[
+                        "grid gap-5",
+                        latestPosts.length === 1
+                            ? "max-w-2xl"
+                            : "md:grid-cols-2 lg:grid-cols-3",
+                    ]}
+                >
                     {latestPosts.map((post) => <PostCard {post} />)}
                 </div>
             </section>

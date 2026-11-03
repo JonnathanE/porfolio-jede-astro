@@ -59,7 +59,7 @@ export const EXPERIENCE: Experience[] = [
     summary:
       "Desarrollo de Cartera365, una aplicación web de gestión de créditos: APIs REST e interfaces, SQL Server, ETL con SSIS, Data Warehouse y despliegues en AWS.",
     description:
-      "Desarrollo y optimización de CARTERA365, una aplicación web para la gestión de créditos, implementando APIs REST e interfaces de usuario con Django REST Framework y React.js. Optimización y administración de bases de datos SQL Server, automatización de procesos ETL con SSIS e implementación de un Data Warehouse para la integración y análisis de datos. Transformación de requerimientos en soluciones técnicas, entrega de nuevas funcionalidades y resolución de incidencias. Gestión de despliegues y mantenimiento en AWS. Colaboración en proyectos de FastLine con Spring Boot y Angular.",
+      "Desarrollo y optimización de CARTERA365, una aplicación web para la gestión de créditos, implementando APIs REST e interfaces de usuario con Django REST Framework y React.js. Optimización y administración de bases de datos SQL Server, automatización de procesos ETL con SSIS e implementación de un Data Warehouse para la integración y análisis de datos. Transformación de requerimientos en soluciones técnicas, entrega de nuevas funcionalidades y resolución de incidencias. Gestión de despliegues y mantenimiento en AWS. Colaboración en proyectos de Fastline con Spring Boot y Angular.",
     tech: [
       "django",
       "springboot",
@@ -79,7 +79,7 @@ export const EXPERIENCE: Experience[] = [
     endYear: 2025,
     currentlyWorking: false,
     title: "Desarrollador Web WordPress",
-    company: "Fastline Cia.Ltda",
+    company: "Fastline",
     location: "Quito, Pichincha, Ecuador",
     workType: "Freelance",
     locationType: "Remoto",

@@ -58,13 +58,13 @@ export const TECH_CATEGORIES: TechCategory[] = [
 	},
 	{
 		title: "Frameworks y librerías",
-		items: ["nest", "react", "django", "express"],
+		items: ["django", "springboot", "react", "angular", "nest", "express"],
 	},
 	{ title: "Bases de datos", items: ["postgresql", "mongodb", "sqlserver"] },
+	{ title: "ETL / Datos", items: ["ssis"] },
 	{
 		title: "Herramientas",
 		items: ["nodejs", "supabase", "docker", "git", "github", "copilot", "aws"],
 	},
 	{ title: "Estilos y UI", items: ["tailwind", "bootstrap"] },
-	{ title: "ETL / Datos", items: ["ssis"] },
 ];

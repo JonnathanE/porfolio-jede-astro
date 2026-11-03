@@ -57,8 +57,8 @@ Experiencia en producción con sistemas financieros y datos, junto con la interf
 ## Evidence on Hand
 
 **Experiencia (`src/constants/experience.ts`):**
-- Desarrollador Fullstack en Tecnofin Tecnología e Innovación S.A.S., con Cartera365 en el sector financiero y colaboración en proyectos de FastLine con Spring Boot y Angular.
-- Desarrollador WordPress freelance para Fastline Cia.Ltda: intranet corporativa, de enero a marzo de 2025.
+- Desarrollador Full Stack en Tecnofin Tecnología e Innovación S.A.S., con Cartera365 en el sector financiero y colaboración en proyectos de Fastline con Spring Boot y Angular.
+- Desarrollador WordPress freelance para Fastline: intranet corporativa, de enero a marzo de 2025.
 - Proyecto de titulación en la Universidad Nacional de Loja: aplicación para enseñar Lengua de Señas Ecuatoriana.
 
 **Proyectos (`src/constants/projects.ts`):**
